@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   PALETA — Pousada Romelândia
+   Fundo:    #F8F8F6  |  Primária: #C0392B
+   Hover:    #8B1A10  |  Texto:    #1C1C1C
+   Seções:   #EBEBEB
+   ============================================= */
+@layer base {
+  :root {
+    --background: 60 5% 97.3%;        /* #F8F8F6 */
+    --foreground: 0 0% 11%;           /* #1C1C1C */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 11%;
+    --primary: 4 62% 46%;             /* #C0392B */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 92.2%;          /* #EBEBEB */
+    --secondary-foreground: 0 0% 11%;
+    --muted: 0 0% 92.2%;              /* #EBEBEB */
+    --muted-foreground: 0 0% 45%;
+    --accent: 4 62% 46%;              /* #C0392B — mesmo que primary */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 87%;
+    --input: 0 0% 87%;
+    --ring: 4 62% 46%;
+    --radius: 0.5rem;
+
+    /* Variáveis extras para uso direto em classes inline */
+    --cor-primaria: #C0392B;
+    --cor-primaria-hover: #8B1A10;
+  }
+
+  /* Modo escuro — mantido como suporte opcional */
+  .dark {
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 13%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 13%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 4 62% 55%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 17%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 17%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 4 62% 55%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 4 62% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Lato', sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Títulos usam Playfair Display */
+  h1, h2, h3, .font-headline {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+/* =============================================
+   EFEITOS GLOBAIS — alinhados ao front-end
+   ============================================= */
+@layer components {
+
+  /* Lift suave nos cards ao hover */
+  .card-lift {
+    @apply transition-all duration-300;
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+  }
+
+  /* Fade-in-up padrão (usado em conjunto com JS ou Tailwind animate) */
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease forwards;
+  }
+
+  /* Barra lateral — destaque de item ativo com a cor primária */
+  .sidebar-active {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Botão primário com hover escurecido */
+  .btn-pousada {
+    @apply bg-primary text-primary-foreground font-semibold rounded-md px-4 py-2 transition-colors duration-200;
+  }
+  .btn-pousada:hover {
+    background-color: #8B1A10;
+  }
+
+  /* Zoom suave em imagens de card */
+  .img-zoom img {
+    @apply transition-transform duration-500;
+  }
+  .img-zoom:hover img {
+    transform: scale(1.04);
+  }
+}

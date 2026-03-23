@@ -1,0 +1,87 @@
+/**
+ * Core Philosophy: This ruleset implements a "single administrator" security model.
+ * Access is not based on individual document ownership but on the user's
+ * authentication status. Any user who is signed in is granted full administrative
+ * privileges to create, read, update, and delete any reservation. This is
+ * designed for a simple backend managed by a single owner or a small, trusted team.
+ *
+ * Data Structure: The data is organized into a single top-level collection named
+ * 'reservations'. This flat structure simplifies querying and management, as all
+ * reservation documents reside at the same hierarchical level.
+ *
+ * Key Security Decisions:
+ * - All operations (read, list, create, update, delete) are gated by a single
+ *   check: is the user an administrator?
+ * - There is no concept of per-reservation ownership or user-specific roles.
+ * - The system explicitly denies all access to non-admin users.
+ * - Listing all documents in the 'reservations' collection is permitted for any
+ *   administrator user, supporting administrative views.
+ *
+ * Denormalization for Authorization: Not applicable in this model. The security
+ * check is based solely on authentication state, requiring no extra data on
+ * the documents themselves.
+ *
+ * Structural Segregation: Not applicable. All reservation data is considered
+ * private to the administrator(s) and is managed within a single collection.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ----------------------------------------------------------------------
+    // Helper Functions
+    // ----------------------------------------------------------------------
+
+    /**
+     * Checks if the authenticated user is the designated administrator.
+     * This is the primary security gate for this entire ruleset.
+     */
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'eullerlolatosmo@gmail.com';
+    }
+
+    /**
+     * Ensures a document exists before an update or delete operation.
+     * Prevents operations on non-existent paths.
+     */
+    function documentExists() {
+      return resource != null;
+    }
+
+    /**
+     * Validates that the document's internal 'id' field matches its
+     * document ID upon creation. Enforces relational integrity.
+     */
+    function hasValidIdOnCreate(docId) {
+      return request.resource.data.id == docId;
+    }
+
+    /**
+     * Ensures that the document's internal 'id' field cannot be changed
+     * after it has been created. Protects the primary relational link.
+     */
+    function isIdImmutable() {
+      return request.resource.data.id == resource.data.id;
+    }
+
+    // ----------------------------------------------------------------------
+    // Collection Rules
+    // ----------------------------------------------------------------------
+
+    /**
+     * @description Grants full read and write access to the designated admin user.
+     * @path /reservations/{reservationId}
+     * @allow An admin user (create) a new reservation document.
+     * @deny A non-admin user (get) a reservation document.
+     * @principle Secures the collection by requiring authentication as a specific
+     *   administrator, reflecting a single-administrator model.
+     */
+    match /reservations/{reservationId} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
+      allow create: if isAdmin() && hasValidIdOnCreate(reservationId);
+      allow update: if isAdmin() && documentExists() && isIdImmutable();
+      allow delete: if isAdmin() && documentExists();
+    }
+  }
+}
