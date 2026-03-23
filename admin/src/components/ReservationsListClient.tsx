@@ -29,8 +29,9 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { MoreHorizontal, PlusCircle, Edit, Trash2, ArrowUpDown, Loader2 } from 'lucide-react';
-import { format, parseISO } from 'date-fns';
+import { Input } from '@/components/ui/input';
+import { MoreHorizontal, PlusCircle, Edit, Trash2, Loader2, Search, X } from 'lucide-react';
+import { format, parseISO, isWithinInterval } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { Reservation } from '@/lib/types';
 import ReservationForm from './ReservationForm';
@@ -45,6 +46,11 @@ export default function ReservationsListClient() {
   const [sortConfig, setSortConfig] = useState<{ key: SortKey; direction: 'ascending' | 'descending' }>({ key: 'startDate', direction: 'ascending' });
   const [deleteConfirmation, setDeleteConfirmation] = useState<Reservation | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  /* Filtros: pesquisa por nome e intervalo de datas */
+  const [search, setSearch] = useState('');
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
 
   const handleAddReservation = () => {
     setSelectedReservation(null);
@@ -81,7 +87,25 @@ export default function ReservationsListClient() {
     setSortConfig({ key, direction });
   };
 
-  const sortedReservations = [...reservations].sort((a, b) => {
+  /* Aplica filtros de pesquisa e data antes de ordenar */
+  const filteredReservations = reservations.filter((res) => {
+    // Filtro por nome do hóspede (case-insensitive)
+    const matchesSearch = search.trim() === '' ||
+      res.guestName.toLowerCase().includes(search.toLowerCase());
+
+    // Filtro por intervalo de datas (check-in dentro do intervalo selecionado)
+    let matchesDate = true;
+    if (dateFrom || dateTo) {
+      const checkIn = parseISO(res.startDate);
+      const from = dateFrom ? parseISO(dateFrom) : new Date('2000-01-01');
+      const to   = dateTo   ? parseISO(dateTo)   : new Date('2100-12-31');
+      matchesDate = isWithinInterval(checkIn, { start: from, end: to });
+    }
+
+    return matchesSearch && matchesDate;
+  });
+
+  const sortedReservations = [...filteredReservations].sort((a, b) => {
     const aValue = a[sortConfig.key];
     const bValue = b[sortConfig.key];
 
@@ -93,6 +117,9 @@ export default function ReservationsListClient() {
     }
     return 0;
   });
+
+  const hasFilters = search !== '' || dateFrom !== '' || dateTo !== '';
+  const clearFilters = () => { setSearch(''); setDateFrom(''); setDateTo(''); };
 
   const getSortIndicator = (key: SortKey) => {
     if (sortConfig.key !== key) return null;
@@ -118,6 +145,56 @@ export default function ReservationsListClient() {
            </span>
          </Button>
       </CardHeader>
+
+      {/* Barra de filtros — pesquisa por nome + intervalo de datas */}
+      <div className="px-6 pb-4 flex flex-col sm:flex-row gap-3">
+        {/* Campo de pesquisa */}
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+          <Input
+            placeholder="Pesquisar hóspede…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9 font-body"
+          />
+        </div>
+
+        {/* Filtro de data — de */}
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-muted-foreground font-body whitespace-nowrap">De</label>
+          <Input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+            className="w-36 font-body"
+          />
+        </div>
+
+        {/* Filtro de data — até */}
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-muted-foreground font-body whitespace-nowrap">Até</label>
+          <Input
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+            className="w-36 font-body"
+          />
+        </div>
+
+        {/* Botão limpar filtros (só aparece quando há algum filtro ativo) */}
+        {hasFilters && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={clearFilters}
+            title="Limpar filtros"
+            className="shrink-0 text-muted-foreground hover:text-foreground"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
+
       <CardContent>
         <Table>
           <TableHeader>
@@ -157,7 +234,7 @@ export default function ReservationsListClient() {
           </TableBody>
         </Table>
         {sortedReservations.length === 0 && !loading && (
-          <div className="text-center py-10 text-muted-foreground">Nenhuma reserva encontrada.</div>
+          <div className="text-center py-10 text-muted-foreground">Nenhuma reserva encontrada{hasFilters ? ' para os filtros aplicados.' : '.'}</div>
         )}
       </CardContent>
     </Card>
@@ -167,11 +244,31 @@ export default function ReservationsListClient() {
      <div className="space-y-4">
         <div className="flex items-center justify-between">
             <div>
-                <h2 className="text-2xl font-bold">Reservas</h2>
-                <p className="text-muted-foreground">Gerencie todas as reservas.</p>
+                <h2 className="font-headline text-2xl font-bold">Reservas</h2>
+                <p className="font-body text-muted-foreground">Gerencie todas as reservas.</p>
             </div>
-            <Button onClick={handleAddReservation} size="icon"><PlusCircle className="h-4 w-4"/></Button>
+            <Button onClick={handleAddReservation} size="icon" className="bg-primary hover:bg-[#8B1A10]">
+              <PlusCircle className="h-4 w-4"/>
+            </Button>
         </div>
+
+        {/* Filtros mobile */}
+        <div className="space-y-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <Input placeholder="Pesquisar hóspede…" value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 font-body" />
+          </div>
+          <div className="flex gap-2">
+            <Input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} className="font-body text-sm" />
+            <Input type="date" value={dateTo}   onChange={(e) => setDateTo(e.target.value)}   className="font-body text-sm" />
+            {hasFilters && (
+              <Button variant="ghost" size="icon" onClick={clearFilters} className="shrink-0">
+                <X className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
+        </div>
+
         {sortedReservations.map(res => (
             <Card key={res.id}>
                 <CardHeader className="flex flex-row items-start justify-between pb-2">
@@ -198,7 +295,7 @@ export default function ReservationsListClient() {
             </Card>
         ))}
          {sortedReservations.length === 0 && !loading && (
-          <div className="text-center py-10 text-muted-foreground">Nenhuma reserva encontrada.</div>
+          <div className="text-center py-10 text-muted-foreground">Nenhuma reserva encontrada{hasFilters ? ' para os filtros aplicados.' : '.'}</div>
         )}
      </div>
   );
