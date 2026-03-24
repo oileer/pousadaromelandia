@@ -105,29 +105,27 @@ export const ReservationsProvider = ({ children }: { children: React.ReactNode }
     }
     
     const finalData = { ...reservationData, createdAt: serverTimestamp() };
-  
-    setDoc(newDocRef, finalData)
-      .then(() => {
-        toast({
-          title: "Reserva Criada!",
-          description: "A nova reserva foi adicionada com sucesso.",
-        });
-      })
-      .catch((error) => {
-        console.error("Error creating reservation: ", error);
-        const contextualError = new FirestorePermissionError({
-          path: newDocRef.path,
-          operation: 'create',
-          requestResourceData: finalData,
-        });
-        errorEmitter.emit('permission-error', contextualError);
-        toast({
-          title: "Erro ao Criar Reserva",
-          description: "Não foi possível criar a reserva. Verifique as permissões.",
-          variant: "destructive",
-        });
-        throw error;
+
+    try {
+      await setDoc(newDocRef, finalData);
+      toast({
+        title: "Reserva Criada!",
+        description: "A nova reserva foi adicionada com sucesso.",
       });
+    } catch (error) {
+      console.error("Error creating reservation: ", error);
+      errorEmitter.emit('permission-error', new FirestorePermissionError({
+        path: newDocRef.path,
+        operation: 'create',
+        requestResourceData: finalData,
+      }));
+      toast({
+        title: "Erro ao Criar Reserva",
+        description: "Não foi possível criar a reserva. Verifique as permissões.",
+        variant: "destructive",
+      });
+      throw error;
+    }
   };
 
   const updateReservation = async (id: string, data: Partial<Omit<Reservation, 'id' | 'createdAt'>>) => {
@@ -147,54 +145,51 @@ export const ReservationsProvider = ({ children }: { children: React.ReactNode }
     const resDoc = doc(db, 'reservations', id);
     const updatePayload = { ...data, id };
 
-    updateDoc(resDoc, updatePayload)
-      .then(() => {
-        toast({
-          title: "Reserva Atualizada!",
-          description: "A reserva foi atualizada com sucesso.",
-        });
-      })
-      .catch((error) => {
-        console.error("Error updating reservation: ", error);
-        const contextualError = new FirestorePermissionError({
-          path: resDoc.path,
-          operation: 'update',
-          requestResourceData: updatePayload,
-        });
-        errorEmitter.emit('permission-error', contextualError);
-        toast({
-          title: "Erro ao Atualizar Reserva",
-          description: "Não foi possível atualizar a reserva.",
-          variant: "destructive",
-        });
-        throw error;
+    try {
+      await updateDoc(resDoc, updatePayload);
+      toast({
+        title: "Reserva Atualizada!",
+        description: "A reserva foi atualizada com sucesso.",
       });
+    } catch (error) {
+      console.error("Error updating reservation: ", error);
+      errorEmitter.emit('permission-error', new FirestorePermissionError({
+        path: resDoc.path,
+        operation: 'update',
+        requestResourceData: updatePayload,
+      }));
+      toast({
+        title: "Erro ao Atualizar Reserva",
+        description: "Não foi possível atualizar a reserva.",
+        variant: "destructive",
+      });
+      throw error;
+    }
   };
 
 
   const deleteReservation = async (id: string) => {
     const resDoc = doc(db, 'reservations', id);
-    deleteDoc(resDoc)
-      .then(() => {
-        toast({
-          title: "Reserva Excluída",
-          description: "A reserva foi removida com sucesso.",
-        });
-      })
-      .catch((error) => {
-        console.error("Error deleting reservation: ", error);
-        const contextualError = new FirestorePermissionError({
-          path: resDoc.path,
-          operation: 'delete',
-        });
-        errorEmitter.emit('permission-error', contextualError);
-        toast({
-          title: "Erro ao Excluir Reserva",
-          description: "Não foi possível excluir a reserva.",
-          variant: "destructive",
-        });
-        throw error;
+
+    try {
+      await deleteDoc(resDoc);
+      toast({
+        title: "Reserva Excluída",
+        description: "A reserva foi removida com sucesso.",
       });
+    } catch (error) {
+      console.error("Error deleting reservation: ", error);
+      errorEmitter.emit('permission-error', new FirestorePermissionError({
+        path: resDoc.path,
+        operation: 'delete',
+      }));
+      toast({
+        title: "Erro ao Excluir Reserva",
+        description: "Não foi possível excluir a reserva.",
+        variant: "destructive",
+      });
+      throw error;
+    }
   };
 
   const calculateRevenueForPeriod = useCallback((filter: RevenueFilterOption): number => {
