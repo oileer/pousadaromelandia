@@ -164,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Coleta os dados do formulário
     const nome       = form.querySelector('[name="nome"]')?.value.trim()       || '';
+    const telefone   = form.querySelector('[name="telefone"]')?.value.trim()    || '';
     const chegada    = form.querySelector('[name="chegada"]')?.value            || '';
     const saida      = form.querySelector('[name="saida"]')?.value              || '';
     const hospedes   = form.querySelector('[name="hospedes"]')?.value           || '';
@@ -180,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Monta a mensagem para o WhatsApp
     let msg = `Olá! Gostaria de fazer uma reserva:%0A%0A`;
     msg += `👤 *Nome:* ${nome}%0A`;
+    if (telefone) msg += `📱 *WhatsApp:* ${telefone}%0A`;
     msg += `🏨 *Quarto:* ${quarto}%0A`;
     msg += `📅 *Chegada:* ${formatarData(chegada)}%0A`;
     msg += `📅 *Saída:* ${formatarData(saida)}%0A`;
