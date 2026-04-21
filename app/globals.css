@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+:root {
+  --cream:    #F7F3EE;
+  --cream-alt:#EDEAE4;
+  --wine:     #9B1B1B;
+  --wine-dark:#6B1212;
+  --wine-soft:rgba(155,27,27,0.08);
+  --text:     #1C1C1C;
+  --text-muted:#6B6560;
+  --text-light:#9A938C;
+  --white:    #FFFFFF;
+  --shadow-sm: 0 4px 20px rgba(0,0,0,0.07);
+  --shadow-md: 0 12px 40px rgba(0,0,0,0.12);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,0.16);
+}
+
+html { scroll-behavior: smooth; background: var(--cream); }
+body { background: var(--cream); color: var(--text); }
+
+/* ── Keyframes ─────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes hero-zoom {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.3); }
+}
+
+.animate-fade-up    { animation: fade-up    0.8s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-fade-in    { animation: fade-in    0.6s ease forwards; }
+.animate-slide-right{ animation: slide-right 0.8s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-hero-zoom  { animation: hero-zoom  8s ease-out forwards; }
+
+/* ── Scroll Reveal ─────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1),
+              transform 0.75s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.from-left  { transform: translateX(-24px); }
+.reveal.from-right { transform: translateX(24px); }
+.reveal.visible    { opacity: 1; transform: translate(0,0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, [class*="animate-"] {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ── Grain overlay ─────────────────────────── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ── Typography ────────────────────────────── */
+.display {
+  font-family: 'Playfair Display SC', Georgia, serif;
+  line-height: 1.12;
+}
+.body-font { font-family: 'Lato', Arial, sans-serif; }
+
+/* ── Decorative underline ──────────────────── */
+.section-label {
+  display: inline-block;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 1.1rem;
+}
+.section-label::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--wine);
+  margin-top: 6px;
+}
+
+/* ── Buttons ───────────────────────────────── */
+.btn-wine {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--wine);
+  color: var(--white);
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.btn-wine:hover {
+  background: var(--wine-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(155,27,27,0.3);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--wine);
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem 2.2rem;
+  border-radius: 4px;
+  border: 2px solid var(--wine);
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: var(--wine);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ── Cards ─────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Image zoom on hover ───────────────────── */
+.img-zoom { overflow: hidden; }
+.img-zoom img {
+  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.img-zoom:hover img { transform: scale(1.05); }
+
+/* ── Amenity tag ───────────────────────────── */
+.amenity-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--cream-alt);
+  color: var(--text-muted);
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+}
+
+/* ── Stat number ───────────────────────────── */
+.stat-num {
+  font-family: 'Playfair Display SC', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--wine);
+  line-height: 1;
+}
+
+/* ── Section separators ────────────────────── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(155,27,27,0.15), transparent);
+  margin: 0;
+}
+
+/* ── Navbar link active ────────────────────── */
+.nav-link-active { color: var(--wine) !important; }
