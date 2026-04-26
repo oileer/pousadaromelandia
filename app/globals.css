@@ -1,18 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --cream:    #F7F3EE;
-  --cream-alt:#EDEAE4;
-  --wine:     #9B1B1B;
-  --wine-dark:#6B1212;
-  --wine-soft:rgba(155,27,27,0.08);
-  --text:     #1C1C1C;
-  --text-muted:#6B6560;
-  --text-light:#9A938C;
-  --white:    #FFFFFF;
-  --shadow-sm: 0 4px 20px rgba(0,0,0,0.07);
-  --shadow-md: 0 12px 40px rgba(0,0,0,0.12);
-  --shadow-lg: 0 24px 60px rgba(0,0,0,0.16);
+  --cream:      #FAF7F2;
+  --cream-alt:  #F1ECE3;
+  --accent:     #6B5B3E;
+  --accent-dark:#4A3F2A;
+  --accent-soft:rgba(107,91,62,0.08);
+  --text:       #1F1B16;
+  --text-muted: #6B6258;
+  --text-light: #9A9082;
+  --white:      #FFFFFF;
+  --line:       #E5DED1;
+  --shadow-sm:  0 4px 20px rgba(31,27,22,0.05);
+  --shadow-md:  0 12px 40px rgba(31,27,22,0.09);
+  --shadow-lg:  0 24px 60px rgba(31,27,22,0.13);
+
+  /* mantém alias wine apontando pro novo acento — não quebra código legado */
+  --wine:       var(--accent);
+  --wine-dark:  var(--accent-dark);
+  --wine-soft:  var(--accent-soft);
 }
 
 html { scroll-behavior: smooth; background: var(--cream); }
@@ -83,7 +89,7 @@ body::after {
 
 /* ── Typography ────────────────────────────── */
 .display {
-  font-family: 'Playfair Display SC', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   line-height: 1.12;
 }
 .body-font { font-family: 'Lato', Arial, sans-serif; }
@@ -113,7 +119,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--wine);
+  background: var(--accent);
   color: var(--white);
   font-family: 'Lato', Arial, sans-serif;
   font-weight: 700;
@@ -121,15 +127,15 @@ body::after {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.9rem 2.2rem;
-  border-radius: 4px;
+  border-radius: 2px;
   text-decoration: none;
   transition: background 0.25s, transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
 }
 .btn-wine:hover {
-  background: var(--wine-dark);
+  background: var(--accent-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(155,27,27,0.3);
+  box-shadow: 0 8px 30px rgba(107,91,62,0.3);
 }
 
 .btn-outline {
@@ -137,21 +143,21 @@ body::after {
   align-items: center;
   gap: 0.5rem;
   background: transparent;
-  color: var(--wine);
+  color: var(--accent);
   font-family: 'Lato', Arial, sans-serif;
   font-weight: 700;
   font-size: 0.82rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.85rem 2.2rem;
-  border-radius: 4px;
-  border: 2px solid var(--wine);
+  border-radius: 2px;
+  border: 1.5px solid var(--accent);
   text-decoration: none;
   transition: all 0.25s;
   cursor: pointer;
 }
 .btn-outline:hover {
-  background: var(--wine);
+  background: var(--accent);
   color: var(--white);
   transform: translateY(-2px);
 }
@@ -196,7 +202,7 @@ body::after {
 
 /* ── Stat number ───────────────────────────── */
 .stat-num {
-  font-family: 'Playfair Display SC', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(2rem, 4vw, 3rem);
   color: var(--wine);
   line-height: 1;
@@ -205,7 +211,7 @@ body::after {
 /* ── Section separators ────────────────────── */
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(155,27,27,0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(107,91,62,0.15), transparent);
   margin: 0;
 }
 

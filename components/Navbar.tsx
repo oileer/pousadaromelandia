@@ -8,6 +8,7 @@ import { WA_URL } from "@/lib/config"
 const links = [
   { href: "/", label: "Início" },
   { href: "/quartos", label: "Quartos" },
+  { href: "/galeria", label: "Galeria" },
   { href: "/reservas", label: "Reservas" },
   { href: "/contato", label: "Contato" },
 ]
