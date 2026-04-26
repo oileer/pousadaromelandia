@@ -1,23 +1,34 @@
-"use client"
-import { useEffect, useRef } from "react"
+'use client';
+import { useEffect } from 'react';
 
-export default function ScrollReveal({ children, delay = 0, className = "" }: {
-  children: React.ReactNode
-  delay?: number
-  className?: string
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-
+export default function ScrollReveal() {
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setTimeout(() => el.classList.add("visible"), delay); obs.unobserve(el) } },
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      },
       { threshold: 0.1 }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [delay])
+    );
 
-  return <div ref={ref} className={`reveal ${className}`}>{children}</div>
+    const attach = () => {
+      document.querySelectorAll('.reveal:not(.visible)').forEach((el) => io.observe(el));
+    };
+
+    attach();
+
+    const mo = new MutationObserver(attach);
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
+  }, []);
+
+  return null;
 }

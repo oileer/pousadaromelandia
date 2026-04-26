@@ -1,50 +1,77 @@
-import Link from "next/link"
-import Image from "next/image"
-import { WA_URL, INSTAGRAM, MAPS_URL } from "@/lib/config"
+'use client';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
-  const wa = WA_URL("Olá! Gostaria de mais informações sobre a Pousada Romelândia.")
   return (
-    <footer style={{ background: "#1a1a1a", color: "rgba(255,255,255,0.7)" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "4rem 2rem 2rem" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "3rem", marginBottom: "3rem" }}>
-          {/* Brand */}
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
-              <Image src="/assets/logo.png" alt="Logo" width={36} height={36} style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }} />
-              <span style={{ fontFamily: "'Playfair Display SC', Georgia, serif", fontSize: "1rem", color: "white", letterSpacing: "0.04em" }}>Pousada Romelândia</span>
-            </div>
-            <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.875rem", lineHeight: 1.7, color: "rgba(255,255,255,0.5)" }}>
-              Conforto e acolhimento no coração de Romelândia SC desde 2018.
-            </p>
+    <footer style={{ background: '#1F1B16', color: 'rgba(250,247,242,.55)', padding: '56px 40px 32px' }}>
+      <div className="footer-grid" style={{
+        maxWidth: 1200, margin: '0 auto',
+        paddingBottom: 40, borderBottom: '1px solid rgba(250,247,242,.08)',
+      }}>
+        {/* Brand */}
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+            <Image src="/assets/logo.png" alt="Logo" width={32} height={32} style={{ objectFit: 'contain', opacity: .85 }} />
+            <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.3rem', fontWeight: 300, color: '#FAF7F2', letterSpacing: '.03em' }}>
+              Pousada Romelândia
+            </span>
           </div>
-
-          {/* Nav */}
-          <div>
-            <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--wine)", marginBottom: "1rem" }}>Navegação</p>
-            {[["/","Início"],["/quartos","Quartos"],["/reservas","Reservas"],["/contato","Contato"]].map(([href,label]) => (
-              <Link key={href} href={href} style={{ display: "block", fontFamily: "Lato, Arial, sans-serif", fontSize: "0.875rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", marginBottom: "0.6rem", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "white")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}>
-                {label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Contato */}
-          <div>
-            <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--wine)", marginBottom: "1rem" }}>Contato</p>
-            <a href={wa} target="_blank" rel="noopener noreferrer" style={{ display: "block", fontFamily: "Lato, Arial, sans-serif", fontSize: "0.875rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", marginBottom: "0.5rem" }}>+55 49 9840-8534</a>
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", fontFamily: "Lato, Arial, sans-serif", fontSize: "0.875rem", color: "rgba(255,255,255,0.55)", textDecoration: "none", marginBottom: "0.5rem", lineHeight: 1.6 }}>R. Doze de Outubro, 798<br />Romelândia SC</a>
-            <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" style={{ display: "block", fontFamily: "Lato, Arial, sans-serif", fontSize: "0.875rem", color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>@pousadaromelandia_</a>
-          </div>
+          <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.85rem', lineHeight: 1.65, maxWidth: 300 }}>
+            Conforto e acolhimento no coração de Romelândia SC desde 2018.
+          </p>
         </div>
 
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "1.5rem", display: "flex", justifyContent: "space-between", flexWrap: "wrap" as const, gap: "0.5rem" }}>
-          <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.78rem", color: "rgba(255,255,255,0.3)" }}>© {new Date().getFullYear()} Pousada Romelândia · Todos os direitos reservados</p>
-          <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.78rem", color: "rgba(255,255,255,0.2)" }}>Site por <span style={{ color: "rgba(155,27,27,0.6)" }}>Host Pro</span></p>
+        {/* Nav */}
+        <div>
+          <div style={{ fontFamily: 'var(--font-lato)', fontSize: '.68rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(250,247,242,.3)', marginBottom: 16 }}>
+            Navegação
+          </div>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {[['Início', '/'], ['Quartos', '/quartos'], ['Galeria', '/galeria'], ['Reservas', '/reservas'], ['Contato', '/contato']].map(([label, href]) => (
+              <li key={href}>
+                <Link href={href} style={{ fontFamily: 'var(--font-lato)', fontSize: '.85rem', color: 'rgba(250,247,242,.52)', textDecoration: 'none', transition: 'color .2s' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#FAF7F2')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(250,247,242,.52)')}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <div style={{ fontFamily: 'var(--font-lato)', fontSize: '.68rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(250,247,242,.3)', marginBottom: 16 }}>
+            Contato
+          </div>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {[
+              ['+55 49 9840-8534', 'https://wa.me/5549984008534'],
+              ['R. Doze de Outubro, 798\nRomelândia SC', 'https://maps.google.com/?q=R.+Doze+de+Outubro,+798,+Romelândia+SC'],
+              ['@pousadaromelandia_', 'https://www.instagram.com/pousadaromelandia_/'],
+            ].map(([label, href]) => (
+              <li key={href}>
+                <Link href={href} target="_blank" rel="noopener noreferrer"
+                  style={{ fontFamily: 'var(--font-lato)', fontSize: '.85rem', color: 'rgba(250,247,242,.52)', textDecoration: 'none', whiteSpace: 'pre-line', transition: 'color .2s' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#FAF7F2')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(250,247,242,.52)')}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
+
+      <div style={{
+        maxWidth: 1200, margin: '28px auto 0',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8,
+        fontFamily: 'var(--font-lato)', fontSize: '.72rem', color: 'rgba(250,247,242,.22)',
+      }}>
+        <span>© 2026 Pousada Romelândia · Todos os direitos reservados</span>
+        <span>Site por Host Pro</span>
+      </div>
     </footer>
-  )
+  );
 }

@@ -2,8 +2,6 @@
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
 
 type Categoria = "Todos" | "Quartos" | "Áreas Comuns"
 
@@ -71,8 +69,6 @@ export default function Galeria() {
 
   return (
     <>
-      <Navbar />
-
       {/* Hero */}
       <section style={{ paddingTop: "110px", paddingBottom: "3rem", background: "var(--cream-alt)", borderBottom: "1px solid var(--line)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
@@ -214,7 +210,7 @@ export default function Galeria() {
         </div>
       </section>
 
-      <Footer />
+
 
       {/* Lightbox */}
       {lightbox !== null && (

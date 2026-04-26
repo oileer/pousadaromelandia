@@ -1,101 +1,123 @@
 "use client"
-import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { WA_URL } from "@/lib/config"
+import { useState, useEffect } from "react"
+
+const WA_URL = "https://wa.me/5549984008534?text=Ol%C3%A1!%20Gostaria%20de%20verificar%20disponibilidade%20e%20fazer%20uma%20reserva."
 
 const links = [
-  { href: "/", label: "Início" },
-  { href: "/quartos", label: "Quartos" },
-  { href: "/galeria", label: "Galeria" },
-  { href: "/reservas", label: "Reservas" },
-  { href: "/contato", label: "Contato" },
+  ["Início", "/"],
+  ["Quartos", "/quartos"],
+  ["Galeria", "/galeria"],
+  ["Reservas", "/reservas"],
+  ["Contato", "/contato"],
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
-  const path = usePathname()
-  const wa = WA_URL("Olá! Gostaria de verificar disponibilidade e fazer uma reserva.")
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50)
-    window.addEventListener("scroll", fn, { passive: true })
-    return () => window.removeEventListener("scroll", fn)
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  const isHome = path === "/"
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
+  }, [menuOpen])
+
+  const navStyle: React.CSSProperties = {
+    position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    padding: "0 40px", height: "72px",
+    background: scrolled ? "rgba(250,247,242,.97)" : "rgba(250,247,242,.9)",
+    backdropFilter: "blur(14px)",
+    borderBottom: scrolled ? "1px solid rgba(31,27,22,.1)" : "1px solid rgba(31,27,22,.06)",
+    transition: "background .3s, border-color .3s, box-shadow .3s",
+    boxShadow: scrolled ? "0 2px 20px rgba(31,27,22,.08)" : "none",
+  }
+
+  const linkStyle: React.CSSProperties = {
+    fontFamily: "var(--font-lato)", fontSize: ".78rem", fontWeight: 700,
+    letterSpacing: ".12em", textTransform: "uppercase" as const, color: "#1F1B16",
+    opacity: .65, textDecoration: "none", transition: "opacity .2s",
+  }
 
   return (
     <>
-      <header style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: scrolled || !isHome ? "rgba(247,243,238,0.95)" : "transparent",
-        backdropFilter: scrolled || !isHome ? "blur(14px)" : "none",
-        borderBottom: scrolled || !isHome ? "1px solid rgba(155,27,27,0.1)" : "1px solid transparent",
-        transition: "all 0.4s ease",
-        boxShadow: scrolled || !isHome ? "0 2px 20px rgba(0,0,0,0.06)" : "none",
-      }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem", height: "70px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <nav style={navStyle}>
+        <Link href="/" onClick={() => setMenuOpen(false)} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+          <Image src="/assets/logo.png" alt="Pousada Romelândia" width={36} height={36} style={{ objectFit: "contain" }} />
+          <span style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.2rem", fontWeight: 500, color: "#1F1B16", letterSpacing: ".03em" }}>
+            Pousada <span style={{ color: "#9B1B1B" }}>Romelândia</span>
+          </span>
+        </Link>
 
-          {/* Logo */}
-          <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem" }}>
-            <Image src="/assets/logo.png" alt="Pousada Romelândia" width={38} height={38} style={{ objectFit: "contain" }} />
-            <span style={{ fontFamily: "'Playfair Display SC', Georgia, serif", fontSize: "1.05rem", fontWeight: 400, color: scrolled || !isHome ? "var(--text)" : "white", letterSpacing: "0.04em", transition: "color 0.3s", lineHeight: 1.2 }}>
-              Pousada<br /><span style={{ color: "var(--wine)", fontSize: "0.8rem" }}>Romelândia</span>
-            </span>
-          </Link>
-
-          {/* Links desktop */}
-          <nav style={{ display: "flex", alignItems: "center", gap: "2.5rem" }} className="nav-desktop">
-            {links.map(l => (
-              <Link key={l.href} href={l.href} style={{
-                fontFamily: "Lato, Arial, sans-serif",
-                fontSize: "0.85rem",
-                fontWeight: 700,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase" as const,
-                textDecoration: "none",
-                color: path === l.href ? "var(--wine)" : (scrolled || !isHome ? "var(--text)" : "rgba(255,255,255,0.9)"),
-                transition: "color 0.2s",
-                borderBottom: path === l.href ? "2px solid var(--wine)" : "2px solid transparent",
-                paddingBottom: "2px",
-              }}>{l.label}</Link>
-            ))}
-            <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-wine" style={{ fontSize: "0.75rem", padding: "0.65rem 1.5rem" }}>
-              Reservar
-            </a>
-          </nav>
-
-          {/* Hamburger */}
-          <button onClick={() => setOpen(!open)} aria-label="Menu" className="hamburger-btn" style={{ background: "none", border: "none", cursor: "pointer", padding: "0.5rem", display: "none", flexDirection: "column" as const, gap: "5px" }}>
-            {[0,1,2].map(i => <span key={i} style={{ display: "block", width: "24px", height: "2px", background: scrolled || !isHome ? "var(--text)" : "white", transition: "background 0.3s" }} />)}
-          </button>
-        </div>
-      </header>
-
-      {/* Mobile overlay */}
-      {open && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 99, background: "rgba(247,243,238,0.98)", backdropFilter: "blur(20px)", display: "flex", flexDirection: "column" as const, alignItems: "center", justifyContent: "center", gap: "2.5rem" }}>
-          <button onClick={() => setOpen(false)} style={{ position: "absolute", top: "1.5rem", right: "2rem", background: "none", border: "none", cursor: "pointer", fontSize: "1.5rem", color: "var(--text-muted)" }}>✕</button>
-          {links.map(l => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)} style={{ fontFamily: "'Playfair Display SC', Georgia, serif", fontSize: "2.2rem", fontWeight: 400, color: path === l.href ? "var(--wine)" : "var(--text)", textDecoration: "none", letterSpacing: "0.04em" }}>
-              {l.label}
-            </Link>
+        <ul className="nav-links-desktop" style={{ gap: 32, listStyle: "none", margin: 0, padding: 0 }}>
+          {links.map(([label, href]) => (
+            <li key={href}>
+              <Link href={href} style={linkStyle}
+                onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
+                onMouseLeave={e => (e.currentTarget.style.opacity = ".65")}>
+                {label}
+              </Link>
+            </li>
           ))}
-          <a href={wa} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="btn-wine">
-            Reservar Agora
-          </a>
-        </div>
-      )}
+        </ul>
 
-      <style>{`
-        @media (max-width: 768px) {
-          .nav-desktop { display: none !important; }
-          .hamburger-btn { display: flex !important; }
-        }
-      `}</style>
+        <Link href={WA_URL} target="_blank" rel="noopener noreferrer"
+          className="nav-cta-desktop"
+          style={{
+            background: "#9B1B1B", color: "#FAF7F2",
+            fontFamily: "var(--font-lato)", fontSize: ".72rem", fontWeight: 700,
+            letterSpacing: ".1em", textTransform: "uppercase" as const,
+            padding: "10px 22px", borderRadius: "2px", textDecoration: "none",
+            transition: "background .2s", alignItems: "center",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.background = "#7a1414")}
+          onMouseLeave={e => (e.currentTarget.style.background = "#9B1B1B")}>
+          Reservar
+        </Link>
+
+        <button className="nav-hamburger" onClick={() => setMenuOpen(v => !v)} aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}>
+          {menuOpen ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          ) : (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>
+            </svg>
+          )}
+        </button>
+      </nav>
+
+      <div className={`nav-mobile-menu${menuOpen ? " open" : ""}`}>
+        {links.map(([label, href]) => (
+          <Link key={href} href={href} onClick={() => setMenuOpen(false)}
+            style={{
+              fontFamily: "var(--font-lato)", fontSize: ".9rem", fontWeight: 700,
+              letterSpacing: ".1em", textTransform: "uppercase" as const,
+              color: "#1F1B16", textDecoration: "none",
+              padding: "14px 0", borderBottom: "1px solid rgba(31,27,22,.07)",
+            }}>
+            {label}
+          </Link>
+        ))}
+        <Link href={WA_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}
+          style={{
+            display: "block", marginTop: 12,
+            background: "#9B1B1B", color: "#FAF7F2",
+            fontFamily: "var(--font-lato)", fontSize: ".78rem", fontWeight: 700,
+            letterSpacing: ".1em", textTransform: "uppercase" as const,
+            padding: "14px", borderRadius: "2px", textDecoration: "none",
+            textAlign: "center" as const,
+          }}>
+          Reservar via WhatsApp
+        </Link>
+      </div>
     </>
   )
 }

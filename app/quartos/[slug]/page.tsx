@@ -3,8 +3,6 @@ import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useParams } from "next/navigation"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
 import { WA_URL } from "@/lib/config"
 
 const QUARTOS = [
@@ -89,18 +87,13 @@ export default function QuartoPage() {
   }, [lightboxIdx, closeLightbox, prev, next])
 
   if (!quarto) return (
-    <>
-      <Navbar />
-      <div style={{ paddingTop: "140px", textAlign: "center", fontFamily: "Lato, Arial, sans-serif", color: "var(--text-muted)" }}>
-        Quarto não encontrado. <Link href="/quartos" style={{ color: "var(--accent)" }}>Ver todos os quartos →</Link>
-      </div>
-      <Footer />
-    </>
+    <div style={{ paddingTop: "140px", textAlign: "center", fontFamily: "Lato, Arial, sans-serif", color: "var(--text-muted)" }}>
+      Quarto não encontrado. <Link href="/quartos" style={{ color: "var(--accent)" }}>Ver todos os quartos →</Link>
+    </div>
   )
 
   return (
     <>
-      <Navbar />
 
       {/* Hero foto */}
       <div style={{ position: "relative", height: "clamp(300px, 55vh, 540px)", marginTop: "72px", overflow: "hidden" }}>
@@ -287,8 +280,6 @@ export default function QuartoPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
 
       {/* Lightbox */}
       {lightboxIdx !== null && (

@@ -1,6 +1,5 @@
 "use client"
 import { useState } from "react"
-import ScrollReveal from "@/components/ScrollReveal"
 
 export const FAQS = [
   {
@@ -51,8 +50,7 @@ export default function FAQ({ items = FAQS, limit }: Props) {
       {list.map((item, i) => {
         const isOpen = open === i
         return (
-          <ScrollReveal key={i} delay={i * 40}>
-            <div style={{ borderBottom: "1px solid var(--line)" }}>
+          <div key={i} className="reveal" style={{ borderBottom: "1px solid var(--line)" }}>
               <button
                 onClick={() => setOpen(isOpen ? null : i)}
                 style={{
@@ -97,7 +95,6 @@ export default function FAQ({ items = FAQS, limit }: Props) {
                 </p>
               </div>
             </div>
-          </ScrollReveal>
         )
       })}
     </div>

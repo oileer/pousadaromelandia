@@ -2,9 +2,6 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
-import ScrollReveal from "@/components/ScrollReveal"
 import { WA_URL } from "@/lib/config"
 
 const quartos = [
@@ -75,7 +72,7 @@ function QuartoCard({ q, index }: { q: typeof quartos[0]; index: number }) {
   const [hovered, setHovered] = useState(false)
 
   return (
-    <ScrollReveal delay={index * 80}>
+    <div className="reveal">
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -185,14 +182,13 @@ function QuartoCard({ q, index }: { q: typeof quartos[0]; index: number }) {
           </div>
         </div>
       </div>
-    </ScrollReveal>
+    </div>
   )
 }
 
 export default function Quartos() {
   return (
     <>
-      <Navbar />
 
       {/* Hero editorial */}
       <section style={{ paddingTop: "0", background: "var(--cream)" }}>
@@ -273,7 +269,6 @@ export default function Quartos() {
         </div>
       </section>
 
-      <Footer />
     </>
   )
 }

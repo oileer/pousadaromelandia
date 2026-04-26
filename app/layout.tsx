@@ -1,25 +1,28 @@
 import type { Metadata } from "next"
 import { Cormorant_Garamond, Lato } from "next/font/google"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import ScrollReveal from "@/components/ScrollReveal"
 import WhatsAppFAB from "@/components/WhatsAppFAB"
 import "./globals.css"
 
-const display = Cormorant_Garamond({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-display",
+  variable: "--font-cormorant",
   display: "swap",
 })
 
-const body = Lato({
+const lato = Lato({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
-  variable: "--font-body",
+  variable: "--font-lato",
   display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: "Hotel Pousada Romelândia | Hospedagem em Romelândia SC",
+  title: { default: "Hotel Pousada Romelândia | Romelândia SC", template: "%s | Pousada Romelândia" },
   description: "Pousada aconchegante no centro de Romelândia SC. 9 quartos com ar-condicionado, Wi-Fi e estacionamento gratuito. Avaliação 4,5 ★ no Google. Reserve pelo WhatsApp.",
   keywords: "pousada romelândia, hotel romelândia SC, hospedagem romelândia, onde dormir romelândia, pousada oeste catarinense",
   openGraph: {
@@ -27,7 +30,7 @@ export const metadata: Metadata = {
     description: "Hospedagem confortável e acolhedora no coração de Romelândia SC. Reserve agora pelo WhatsApp.",
     type: "website",
     locale: "pt_BR",
-    images: [{ url: "/assets/og-image.jpg", width: 1200, height: 630, alt: "Hotel Pousada Romelândia" }],
+    images: [{ url: "/assets/Corredores/1.jpeg", width: 1200, height: 630, alt: "Hotel Pousada Romelândia" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -45,7 +48,7 @@ const schemaOrg = {
   "url": "https://www.pousadaromelandia.com.br",
   "telephone": "+55 49 9 8400-8534",
   "email": "pousadaromelandia@gmail.com",
-  "image": "https://www.pousadaromelandia.com.br/assets/og-image.jpg",
+  "image": "https://www.pousadaromelandia.com.br/assets/Corredores/1.jpeg",
   "description": "Pousada aconchegante no centro de Romelândia SC. 9 quartos com ar-condicionado, Wi-Fi e estacionamento gratuito.",
   "priceRange": "$$",
   "checkinTime": "14:00",
@@ -58,39 +61,31 @@ const schemaOrg = {
     "postalCode": "89890-000",
     "addressCountry": "BR"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": -26.6956,
-    "longitude": -53.5342
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.5",
-    "reviewCount": "60",
-    "bestRating": "5"
-  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -26.6956, "longitude": -53.5342 },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.5", "reviewCount": "60", "bestRating": "5" },
   "amenityFeature": [
-    { "@type": "LocationFeatureSpecification", "name": "Wi-Fi gratuito",        "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Ar-condicionado",       "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Estacionamento",        "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Café da manhã",         "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "TV a cabo",             "value": true }
+    { "@type": "LocationFeatureSpecification", "name": "Wi-Fi gratuito", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Ar-condicionado", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Estacionamento", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Café da manhã", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "TV a cabo", "value": true }
   ],
   "numberOfRooms": 9,
-  "starRating": { "@type": "Rating", "ratingValue": "3" }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${display.variable} ${body.variable}`}>
+    <html lang="pt-BR" className={`${cormorant.variable} ${lato.variable}`}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }} />
       </head>
-      <body style={{ fontFamily: "Lato, Arial, sans-serif", backgroundColor: "var(--cream)", color: "var(--text)" }}>
-        {children}
+      <body style={{ background: "#FAF7F2", color: "#1F1B16", overflowX: "hidden" }}>
+        <Navbar />
+        <main>
+          {children}
+        </main>
+        <Footer />
+        <ScrollReveal />
         <WhatsAppFAB />
       </body>
     </html>
