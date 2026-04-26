@@ -22,6 +22,7 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://pousadaromelandia.vercel.app"),
   title: { default: "Hotel Pousada Romelândia | Romelândia SC", template: "%s | Pousada Romelândia" },
   description: "Pousada aconchegante no centro de Romelândia SC. 9 quartos com ar-condicionado, Wi-Fi e estacionamento gratuito. Avaliação 4,5 ★ no Google. Reserve pelo WhatsApp.",
   keywords: "pousada romelândia, hotel romelândia SC, hospedagem romelândia, onde dormir romelândia, pousada oeste catarinense",
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     description: "Hospedagem confortável e acolhedora no coração de Romelândia SC. Reserve agora pelo WhatsApp.",
     type: "website",
     locale: "pt_BR",
-    images: [{ url: "/assets/Corredores/1.jpeg", width: 1200, height: 630, alt: "Hotel Pousada Romelândia" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Hotel Pousada Romelândia" }],
   },
   twitter: {
     card: "summary_large_image",

@@ -15,28 +15,28 @@ export const metadata: Metadata = {
 
 const rooms = [
   {
-    name: 'Quarto Conforto',
+    name: 'Quarto 5',
     slug: 'q5',
     imageSrc: '/assets/Quarto5/1.jpeg',
     capacity: 'Até 4 pessoas',
     tags: ['Cama Casal', '2 Solteiros', 'Ar-cond.', 'Wi-Fi'],
-    waMessage: 'Olá! Tenho interesse no Quarto Conforto. Pode verificar disponibilidade?',
+    waMessage: 'Olá! Tenho interesse no Quarto 5. Pode verificar disponibilidade?',
   },
   {
-    name: 'Quarto Superior',
+    name: 'Quarto 6',
     slug: 'q6',
     imageSrc: '/assets/Quarto6/1.jpeg',
     capacity: 'Até 4 pessoas',
     tags: ['Cama Casal', '2 Solteiros', 'Frigobar', 'Wi-Fi'],
-    waMessage: 'Olá! Tenho interesse no Quarto Superior. Pode verificar disponibilidade?',
+    waMessage: 'Olá! Tenho interesse no Quarto 6. Pode verificar disponibilidade?',
   },
   {
-    name: 'Quarto Casal',
+    name: 'Quarto 7',
     slug: 'q7',
     imageSrc: '/assets/Quarto7/1.jpeg',
     capacity: 'Até 3 pessoas',
     tags: ['Cama Casal', 'Ar-cond.', 'Wi-Fi', 'Privativo'],
-    waMessage: 'Olá! Tenho interesse no Quarto Casal. Pode verificar disponibilidade?',
+    waMessage: 'Olá! Tenho interesse no Quarto 7. Pode verificar disponibilidade?',
   },
 ];
 

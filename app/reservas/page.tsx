@@ -2,11 +2,11 @@
 import { WA_URL } from '@/lib/config';
 
 const opcoes = [
-  { nome: 'Quarto Conforto', capacidade: 'Até 4 pessoas', msg: 'Olá! Gostaria de reservar o Quarto Conforto. Poderia verificar a disponibilidade?' },
-  { nome: 'Quarto Superior', capacidade: 'Até 4 pessoas', msg: 'Olá! Gostaria de reservar o Quarto Superior. Poderia verificar a disponibilidade?' },
-  { nome: 'Quarto Casal', capacidade: 'Até 3 pessoas', msg: 'Olá! Gostaria de reservar o Quarto Casal. Poderia verificar a disponibilidade?' },
-  { nome: 'Quarto Família', capacidade: 'Até 2 pessoas', msg: 'Olá! Gostaria de reservar o Quarto Família. Poderia verificar a disponibilidade?' },
-  { nome: 'Suíte Master', capacidade: 'Até 3 pessoas', msg: 'Olá! Gostaria de reservar a Suíte Master. Poderia verificar a disponibilidade?' },
+  { nome: 'Quarto 5', capacidade: 'Até 4 pessoas', msg: 'Olá! Gostaria de reservar o Quarto 5. Poderia verificar a disponibilidade?' },
+  { nome: 'Quarto 6', capacidade: 'Até 4 pessoas', msg: 'Olá! Gostaria de reservar o Quarto 6. Poderia verificar a disponibilidade?' },
+  { nome: 'Quarto 7', capacidade: 'Até 3 pessoas', msg: 'Olá! Gostaria de reservar o Quarto 7. Poderia verificar a disponibilidade?' },
+  { nome: 'Quarto 8', capacidade: 'Até 2 pessoas', msg: 'Olá! Gostaria de reservar o Quarto 8. Poderia verificar a disponibilidade?' },
+  { nome: 'Quarto 9', capacidade: 'Até 3 pessoas', msg: 'Olá! Gostaria de reservar o Quarto 9. Poderia verificar a disponibilidade?' },
 ];
 
 const waIcon = (
