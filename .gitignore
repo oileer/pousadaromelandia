@@ -1,0 +1,35 @@
+# Dependências
+node_modules/
+admin/node_modules/
+
+# Build Next.js
+.next/
+out/
+admin/.next/
+admin/out/
+tsconfig.tsbuildinfo
+
+# Variáveis de ambiente — NUNCA commitar
+admin/.env.local
+admin/.env.*.local
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/settings.json
+.idea/
+
+# Claude Code (memória local da IA)
+.claude/
+
+# Arquivos temporários
+*.tmp
+*.temp
