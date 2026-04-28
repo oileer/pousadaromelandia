@@ -33,3 +33,4 @@ Thumbs.db
 # Arquivos temporários
 *.tmp
 *.temp
+admin/src_extracted/
