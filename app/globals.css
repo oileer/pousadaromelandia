@@ -344,3 +344,83 @@ body::after {
   /* Generic padding */
   .section-pad-h { padding-left: 20px !important; padding-right: 20px !important; }
 }
+
+/* ══════════════════════════════════════════════
+   Fontes herdadas (botões/inputs não usavam Lato)
+   ══════════════════════════════════════════════ */
+body { font-family: var(--font-lato), Lato, Arial, sans-serif; }
+button, input, select, textarea, a { font-family: inherit; }
+
+/* ══════════════════════════════════════════════
+   Efeitos e fundos da marca (azul-marinho + dourado)
+   ══════════════════════════════════════════════ */
+
+/* barra de progresso de rolagem */
+.fx-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 10000; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #C9A24B, #E3CE9A); pointer-events: none; }
+
+/* aurora: manchas douradas e azuis que flutuam devagar sobre o fundo escuro */
+.fx-aurora { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; mix-blend-mode: screen; }
+.fx-aurora i { position: absolute; width: 46vmax; height: 46vmax; border-radius: 50%; filter: blur(80px); opacity: .34; }
+.fx-aurora i:nth-child(1) { left: -12vmax; top: 4vmax; background: radial-gradient(circle, rgba(201,162,75,.75), transparent 62%); animation: fxDrift1 22s ease-in-out infinite alternate; }
+.fx-aurora i:nth-child(2) { right: -14vmax; top: -10vmax; background: radial-gradient(circle, rgba(60,110,190,.7), transparent 62%); animation: fxDrift2 28s ease-in-out infinite alternate; }
+.fx-aurora i:nth-child(3) { left: 30%; bottom: -24vmax; background: radial-gradient(circle, rgba(201,162,75,.45), transparent 60%); animation: fxDrift3 34s ease-in-out infinite alternate; }
+@keyframes fxDrift1 { to { transform: translate(14vmax, 6vmax) scale(1.15); } }
+@keyframes fxDrift2 { to { transform: translate(-12vmax, 10vmax) scale(1.2); } }
+@keyframes fxDrift3 { to { transform: translate(-10vmax, -8vmax) scale(.9); } }
+
+/* linhas de telhado: ecoam o símbolo da marca, bem discretas */
+.fx-roof { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .5;
+  background-image: repeating-linear-gradient(122deg, transparent 0 46px, rgba(201,162,75,.07) 46px 48px, transparent 48px 120px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 40%, transparent); }
+
+/* texto dourado com brilho que passa */
+.fx-gold-text { background: linear-gradient(100deg, #E3CE9A 0%, #C9A24B 35%, #F4E4B8 50%, #C9A24B 65%, #E3CE9A 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: fxGoldSweep 7s linear infinite; }
+@keyframes fxGoldSweep { to { background-position: -220% 0; } }
+
+/* cartão de reserva do hero: vidro com borda dourada */
+.fx-widget { position: relative; background: rgba(244,239,230,.96); padding: 26px 24px 22px; border-radius: 6px; box-shadow: 0 30px 80px rgba(3,10,22,.5), 0 0 0 1px rgba(201,162,75,.35); backdrop-filter: blur(10px); }
+.fx-widget::before { content: ""; position: absolute; left: 24px; right: 24px; top: 0; height: 2px; background: linear-gradient(90deg, transparent, #C9A24B, transparent); }
+.fx-avail { margin: -2px 0 12px; padding: 9px 12px; border-radius: 4px; font-size: .8rem; font-weight: 700; font-family: var(--font-lato), Lato, sans-serif; animation: fadeIn .35s both; }
+.fx-avail-ok { background: #e6f4ea; color: #17613a; }
+.fx-avail-full { background: #fbe9e7; color: #9a2b1d; }
+.fx-avail-loading, .fx-avail-unknown { background: rgba(11,31,58,.06); color: rgba(11,31,58,.7); }
+
+/* botões */
+.fx-btn { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; padding: 14px; border-radius: 3px; text-decoration: none; border: 0; cursor: pointer; font-family: var(--font-lato), Lato, sans-serif; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-top: 4px; transition: transform .2s, box-shadow .25s, background .25s, color .25s; }
+.fx-btn-navy { background: #0B1F3A; color: #F4EFE6; box-shadow: 0 10px 26px rgba(11,31,58,.28); }
+.fx-btn-navy:hover { background: #102c52; box-shadow: 0 14px 34px rgba(11,31,58,.38); }
+.fx-btn-ghost { margin-top: 8px; background: transparent; color: #0B1F3A; box-shadow: inset 0 0 0 1.5px rgba(11,31,58,.28); }
+.fx-btn-ghost:hover { box-shadow: inset 0 0 0 1.5px #C9A24B; color: #0B1F3A; background: rgba(201,162,75,.12); }
+.fx-btn:focus-visible { outline: 2px solid #C9A24B; outline-offset: 3px; }
+.fx-shine::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(244,239,230,.35), transparent); transform: skewX(-18deg); animation: fxShine 4.5s ease-in-out infinite; }
+@keyframes fxShine { 0%, 60% { left: -60%; } 100% { left: 130%; } }
+.fx-magnetic { will-change: transform; }
+
+/* cartões com brilho dourado que segue o mouse */
+.fx-card { position: relative; }
+.fx-card::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(201,162,75,.18), transparent 45%); }
+.fx-card:hover::before { opacity: 1; }
+.fx-card:hover { box-shadow: 0 22px 60px rgba(11,31,58,.2), 0 0 0 1px rgba(201,162,75,.45) !important; }
+
+/* fundos escuros ganham aurora + linhas de telhado */
+.fx-dark { position: relative; isolation: isolate; overflow: hidden; }
+.fx-dark > .fx-aurora, .fx-dark > .fx-roof { z-index: 0; }
+.fx-dark > *:not(.fx-aurora):not(.fx-roof) { position: relative; z-index: 2; }
+
+/* ícone do WhatsApp */
+.wa-fab { position: fixed; right: 22px; bottom: 22px; z-index: 9000; display: flex; align-items: center; gap: 0; height: 60px; padding: 0; border-radius: 999px; text-decoration: none; color: #fff; background: linear-gradient(145deg, #2fe074, #0fa855); box-shadow: 0 10px 30px rgba(15,168,85,.45), 0 0 0 1px rgba(255,255,255,.25) inset; transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, opacity .4s; }
+.wa-fab:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 16px 40px rgba(15,168,85,.55), 0 0 0 1px rgba(255,255,255,.3) inset; }
+.wa-fab .wa-ico { position: relative; flex: none; width: 60px; height: 60px; display: grid; place-items: center; }
+.wa-fab .wa-ico::before, .wa-fab .wa-ico::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; border: 2px solid rgba(47,224,116,.7); animation: waRing 2.6s ease-out infinite; }
+.wa-fab .wa-ico::after { animation-delay: 1.3s; }
+@keyframes waRing { 0% { transform: scale(1); opacity: .75; } 100% { transform: scale(1.75); opacity: 0; } }
+.wa-fab .wa-label { max-width: 0; overflow: hidden; white-space: nowrap; font-weight: 700; font-size: .86rem; letter-spacing: .02em; transition: max-width .45s ease, padding .45s ease; }
+.wa-fab.open .wa-label, .wa-fab:hover .wa-label, .wa-fab:focus-visible .wa-label { max-width: 190px; padding-right: 22px; }
+.wa-dot { position: absolute; top: 6px; right: 6px; width: 11px; height: 11px; border-radius: 50%; background: #C9A24B; border: 2px solid #fff; }
+@media (max-width: 640px) { .wa-fab { right: 14px; bottom: 14px; height: 56px; } .wa-fab .wa-ico { width: 56px; height: 56px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-aurora i, .fx-gold-text, .fx-shine::after, .wa-fab .wa-ico::before, .wa-fab .wa-ico::after { animation: none !important; }
+  .fx-progress { display: none; }
+}

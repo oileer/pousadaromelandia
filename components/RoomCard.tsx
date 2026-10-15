@@ -25,7 +25,7 @@ export default function RoomCard({ name, slug, imageSrc, capacity, tags, waMessa
 
   return (
     <article
-      className="room-card-hover"
+      className="room-card-hover fx-card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{

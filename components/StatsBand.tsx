@@ -1,9 +1,9 @@
 'use client';
 
-const stats = [
-  { num: '9',    label: 'Quartos' },
+const stats: { num: string; label: string; count?: string }[] = [
+  { num: '9',    label: 'Quartos', count: '9' },
   { num: '4,5★', label: 'Google Reviews' },
-  { num: '60+',  label: 'Avaliações' },
+  { num: '60+',  label: 'Avaliações', count: '60' },
   { num: '2018', label: 'Em atividade desde' },
 ];
 
@@ -15,7 +15,7 @@ export default function StatsBand() {
           flex: 1, maxWidth: 220, textAlign: 'center' as const, padding: '0 24px',
           borderLeft: i > 0 ? '1px solid rgba(244,239,230,.12)' : 'none',
         }}>
-          <div style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2.6rem', fontWeight: 300, color: '#F4EFE6', lineHeight: 1 }}>
+          <div {...(s.count ? { 'data-count': s.count, 'data-suffix': s.num.replace(s.count, '') } : {})} style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2.6rem', fontWeight: 300, color: '#F4EFE6', lineHeight: 1 }}>
             {s.num}
           </div>
           <div style={{ fontFamily: 'var(--font-lato)', fontSize: '.68rem', fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase' as const, color: 'rgba(244,239,230,.4)', marginTop: 6 }}>

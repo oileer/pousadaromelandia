@@ -4,7 +4,8 @@ import BrandLogo from '@/components/BrandLogo';
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#0B1F3A', color: 'rgba(244,239,230,.55)', padding: '56px 40px 32px' }}>
+    <footer className="fx-dark" style={{ background: '#0B1F3A', color: 'rgba(244,239,230,.55)', padding: '56px 40px 32px' }}>
+      <div className="fx-roof" aria-hidden="true" />
       <div className="footer-grid" style={{
         maxWidth: 1200, margin: '0 auto',
         paddingBottom: 40, borderBottom: '1px solid rgba(244,239,230,.08)',

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import ScrollReveal from "@/components/ScrollReveal"
 import WhatsAppFAB from "@/components/WhatsAppFAB"
+import SiteFx from "@/components/SiteFx"
 import "./globals.css"
 
 const cormorant = Playfair_Display({
@@ -92,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <ScrollReveal />
+        <SiteFx />
         <WhatsAppFAB />
       </body>
     </html>

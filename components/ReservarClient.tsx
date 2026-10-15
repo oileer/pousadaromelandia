@@ -52,8 +52,13 @@ export default function ReservarClient() {
   const [mine, setMine] = useState<Mine[]>([])
   const [err, setErr] = useState("")
   const [busy, setBusy] = useState(false)
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).has("checkin"))
   const [sent, setSent] = useState(false)
+  const [pre] = useState(() => {
+    if (typeof window === "undefined") return { checkin: "", checkout: "", people: "" }
+    const q = new URLSearchParams(window.location.search)
+    return { checkin: q.get("checkin") ?? "", checkout: q.get("checkout") ?? "", people: q.get("people") ?? "" }
+  })
 
   useEffect(() => onAuthStateChanged(auth, u => setUser(u)), [])
 
@@ -201,11 +206,11 @@ export default function ReservarClient() {
               <h2 style={{ ...serif, fontSize: "1.6rem", fontWeight: 500 }}>Sobre a estadia</h2>
               <p style={{ ...sans, fontSize: ".85rem", color: "var(--text-muted)" }}>Olá, {profile.name.split(" ")[0]}! Preencha os dados abaixo.</p>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".75rem" }}>
-                <div><label style={label}>Check-in</label><input name="checkin" type="date" min={today} required style={input} /></div>
-                <div><label style={label}>Check-out</label><input name="checkout" type="date" min={today} required style={input} /></div>
+                <div><label style={label}>Check-in</label><input name="checkin" type="date" min={today} required defaultValue={pre.checkin} style={input} /></div>
+                <div><label style={label}>Check-out</label><input name="checkout" type="date" min={today} required defaultValue={pre.checkout} style={input} /></div>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".75rem" }}>
-                <div><label style={label}>Hóspedes</label><select name="people" style={input}>{Array.from({ length: 8 }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1}</option>)}</select></div>
+                <div><label style={label}>Hóspedes</label><select name="people" defaultValue={pre.people || "1"} style={input}>{Array.from({ length: 8 }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1}</option>)}</select></div>
                 <div><label style={label}>Horário previsto de chegada</label><input name="arrival" type="time" style={input} /></div>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: ".75rem" }}>
