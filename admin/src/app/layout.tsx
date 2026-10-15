@@ -24,7 +24,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/logo-pousada.png" />
       </head>
       <body className={cn(cormorant.variable, lato.variable, 'font-body antialiased')}>
         <AuthProvider>
