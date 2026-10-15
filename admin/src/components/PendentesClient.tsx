@@ -65,7 +65,7 @@ function PendingCard({ r, onDone }: { r: Reservation; onDone: (r: Reservation) =
         </div>
         {r.notes && r.notes !== 'Reserva feita pelo site' && <p className="rounded-md bg-muted/60 p-3 text-sm">{r.notes}</p>}
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-          <span className="rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary">{ORIGIN_LABEL[r.origem ?? 'site']}</span>
+          <span className="rounded-full bg-[#C9A24B]/25 px-2 py-0.5 font-bold text-[#0B1F3A]">{ORIGIN_LABEL[r.origem ?? 'site']}</span>
           {r.email && <span>{r.email}</span>}
           {r.document && <span>CPF {r.document}</span>}
           {r.city && <span>{r.city}</span>}

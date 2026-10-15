@@ -13,7 +13,7 @@ interface Mine {
 }
 interface Profile { name: string; phone: string; document?: string; city?: string }
 
-const serif: React.CSSProperties = { fontFamily: "'Cormorant Garamond', Georgia, serif" }
+const serif: React.CSSProperties = { fontFamily: "var(--font-cormorant), Georgia, serif" }
 const sans: React.CSSProperties = { fontFamily: "Lato, Arial, sans-serif" }
 const card: React.CSSProperties = { background: "#fff", border: "1px solid var(--line)", borderRadius: 8, padding: "1.5rem", boxShadow: "var(--shadow-sm)" }
 const label: React.CSSProperties = { ...sans, display: "block", fontSize: ".7rem", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: ".35rem" }
@@ -42,8 +42,8 @@ const STATUS_TXT: Record<Status, { t: string; c: string; d: string }> = {
   pendente: { t: "Aguardando confirmação", c: "#8a6a00", d: "Recebemos seu pedido. Assim que confirmarmos a disponibilidade você é avisado aqui e no WhatsApp." },
   confirmada: { t: "Reserva confirmada", c: "#1f7a3d", d: "Tudo certo! Sua reserva está confirmada. Check-in a partir das 14h, check-out até 12h." },
   hospedada: { t: "Hospedagem em andamento", c: "#1b5fa8", d: "Boa estadia!" },
-  concluida: { t: "Estadia concluída", c: "#6B6258", d: "Obrigado por se hospedar com a gente. Volte sempre!" },
-  cancelada: { t: "Não foi possível confirmar", c: "#9B1B1B", d: "Infelizmente não conseguimos atender esse pedido. Fale com a gente pelo WhatsApp para outras datas." },
+  concluida: { t: "Estadia concluída", c: "#566178", d: "Obrigado por se hospedar com a gente. Volte sempre!" },
+  cancelada: { t: "Não foi possível confirmar", c: "#0B1F3A", d: "Infelizmente não conseguimos atender esse pedido. Fale com a gente pelo WhatsApp para outras datas." },
 }
 
 export default function ReservarClient() {

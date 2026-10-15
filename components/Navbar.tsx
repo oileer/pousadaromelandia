@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import BrandLogo from "@/components/BrandLogo"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 
@@ -32,16 +33,16 @@ export default function Navbar() {
     position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
     display: "flex", alignItems: "center", justifyContent: "space-between",
     padding: "0 40px", height: "72px",
-    background: scrolled ? "rgba(250,247,242,.97)" : "rgba(250,247,242,.9)",
+    background: scrolled ? "rgba(244,239,230,.97)" : "rgba(244,239,230,.9)",
     backdropFilter: "blur(14px)",
-    borderBottom: scrolled ? "1px solid rgba(31,27,22,.1)" : "1px solid rgba(31,27,22,.06)",
+    borderBottom: scrolled ? "1px solid rgba(11,31,58,.1)" : "1px solid rgba(11,31,58,.06)",
     transition: "background .3s, border-color .3s, box-shadow .3s",
-    boxShadow: scrolled ? "0 2px 20px rgba(31,27,22,.08)" : "none",
+    boxShadow: scrolled ? "0 2px 20px rgba(11,31,58,.08)" : "none",
   }
 
   const linkStyle: React.CSSProperties = {
     fontFamily: "var(--font-lato)", fontSize: ".78rem", fontWeight: 700,
-    letterSpacing: ".12em", textTransform: "uppercase" as const, color: "#1F1B16",
+    letterSpacing: ".12em", textTransform: "uppercase" as const, color: "#0B1F3A",
     opacity: .65, textDecoration: "none", transition: "opacity .2s",
   }
 
@@ -49,10 +50,7 @@ export default function Navbar() {
     <>
       <nav style={navStyle}>
         <Link href="/" onClick={() => setMenuOpen(false)} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <Image src="/assets/logo.png" alt="Pousada Romelândia" width={36} height={36} style={{ objectFit: "contain" }} />
-          <span style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.2rem", fontWeight: 500, color: "#1F1B16", letterSpacing: ".03em" }}>
-            Pousada <span style={{ color: "#9B1B1B" }}>Romelândia</span>
-          </span>
+          <BrandLogo height={38} />
         </Link>
 
         <ul className="nav-links-desktop" style={{ gap: 32, listStyle: "none", margin: 0, padding: 0 }}>
@@ -70,14 +68,14 @@ export default function Navbar() {
         <Link href={WA_URL} target="_blank" rel="noopener noreferrer"
           className="nav-cta-desktop"
           style={{
-            background: "#9B1B1B", color: "#FAF7F2",
+            background: "#0B1F3A", color: "#F4EFE6",
             fontFamily: "var(--font-lato)", fontSize: ".72rem", fontWeight: 700,
             letterSpacing: ".1em", textTransform: "uppercase" as const,
             padding: "10px 22px", borderRadius: "2px", textDecoration: "none",
             transition: "background .2s", alignItems: "center",
           }}
-          onMouseEnter={e => (e.currentTarget.style.background = "#7a1414")}
-          onMouseLeave={e => (e.currentTarget.style.background = "#9B1B1B")}>
+          onMouseEnter={e => (e.currentTarget.style.background = "#07162B")}
+          onMouseLeave={e => (e.currentTarget.style.background = "#0B1F3A")}>
           Reservar
         </Link>
 
@@ -100,8 +98,8 @@ export default function Navbar() {
             style={{
               fontFamily: "var(--font-lato)", fontSize: ".9rem", fontWeight: 700,
               letterSpacing: ".1em", textTransform: "uppercase" as const,
-              color: "#1F1B16", textDecoration: "none",
-              padding: "14px 0", borderBottom: "1px solid rgba(31,27,22,.07)",
+              color: "#0B1F3A", textDecoration: "none",
+              padding: "14px 0", borderBottom: "1px solid rgba(11,31,58,.07)",
             }}>
             {label}
           </Link>
@@ -109,7 +107,7 @@ export default function Navbar() {
         <Link href={WA_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}
           style={{
             display: "block", marginTop: 12,
-            background: "#9B1B1B", color: "#FAF7F2",
+            background: "#0B1F3A", color: "#F4EFE6",
             fontFamily: "var(--font-lato)", fontSize: ".78rem", fontWeight: 700,
             letterSpacing: ".1em", textTransform: "uppercase" as const,
             padding: "14px", borderRadius: "2px", textDecoration: "none",

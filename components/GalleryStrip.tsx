@@ -34,7 +34,7 @@ function GalleryItem({ src, alt, style, onClick }: { src: string; alt: string; s
       />
       <div style={{
         position: 'absolute', inset: 0,
-        background: hovered ? 'rgba(31,27,22,.28)' : 'rgba(31,27,22,0)',
+        background: hovered ? 'rgba(11,31,58,.28)' : 'rgba(11,31,58,0)',
         transition: 'background .3s',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
@@ -50,7 +50,7 @@ export default function GalleryStrip() {
   const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
-    <section style={{ padding: '0 40px 96px', background: '#FAF7F2' }}>
+    <section style={{ padding: '0 40px 96px', background: '#F4EFE6' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div className="reveal" style={{
           display: 'grid',
@@ -71,8 +71,8 @@ export default function GalleryStrip() {
         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 28 }}>
           <Link href="/galeria" style={{
             fontFamily: 'var(--font-lato)', fontSize: '.78rem', fontWeight: 700,
-            letterSpacing: '.1em', textTransform: 'uppercase' as const, color: '#9B1B1B',
-            borderBottom: '1px solid #9B1B1B', paddingBottom: 2, textDecoration: 'none',
+            letterSpacing: '.1em', textTransform: 'uppercase' as const, color: '#0B1F3A',
+            borderBottom: '1px solid #0B1F3A', paddingBottom: 2, textDecoration: 'none',
           }}>
             Ver galeria completa &rarr;
           </Link>
@@ -92,7 +92,7 @@ export default function GalleryStrip() {
             onClick={() => setLightbox(null)}
             style={{
               position: 'fixed', top: 24, right: 28,
-              color: 'rgba(250,247,242,.7)', fontSize: '2rem', cursor: 'pointer',
+              color: 'rgba(244,239,230,.7)', fontSize: '2rem', cursor: 'pointer',
               background: 'none', border: 'none', lineHeight: 1,
             }}
           >

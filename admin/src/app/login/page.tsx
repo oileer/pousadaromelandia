@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
-import Image from 'next/image';
+import BrandLogo from '@/components/BrandLogo';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -59,10 +59,8 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center">
-             <Image src="/logo-pousada.png" alt="Pousada Romelândia" width={100} height={100} />
-          </div>
-          <CardTitle className="text-2xl font-bold">Pousada Romelândia</CardTitle>
+          <div className="mb-4 flex justify-center"><BrandLogo height={50} /></div>
+          <CardTitle className="font-headline text-2xl">Painel de reservas</CardTitle>
           <CardDescription>Acesse o painel de controle de reservas</CardDescription>
         </CardHeader>
         <CardContent>

@@ -18,36 +18,36 @@ const waIcon = (
 export default function Reservas() {
   return (
     <>
-      <section style={{ paddingTop: 110, paddingBottom: 56, background: '#FAF7F2' }}>
+      <section style={{ paddingTop: 110, paddingBottom: 56, background: '#F4EFE6' }}>
         <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 40px', textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 16 }}>
-            <div style={{ width: 28, height: 1, background: '#9B1B1B' }} />
-            <span style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#9B1B1B' }}>Reservas</span>
-            <div style={{ width: 28, height: 1, background: '#9B1B1B' }} />
+            <div style={{ width: 28, height: 1, background: '#0B1F3A' }} />
+            <span style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#0B1F3A' }}>Reservas</span>
+            <div style={{ width: 28, height: 1, background: '#0B1F3A' }} />
           </div>
-          <h1 style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#1F1B16', lineHeight: 1.1, marginBottom: 16 }}>
+          <h1 style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#0B1F3A', lineHeight: 1.1, marginBottom: 16 }}>
             Reserve seu quarto
           </h1>
-          <p style={{ fontFamily: 'var(--font-lato)', fontSize: '1rem', color: 'rgba(31,27,22,.55)', lineHeight: 1.75 }}>
+          <p style={{ fontFamily: 'var(--font-lato)', fontSize: '1rem', color: 'rgba(11,31,58,.55)', lineHeight: 1.75 }}>
             Sem formulários complicados. Escolha o quarto, clique e fale direto com a gente pelo WhatsApp. Respondemos em minutos.
           </p>
         </div>
       </section>
 
-      <section style={{ background: '#FAF7F2', padding: '64px 40px' }}>
+      <section style={{ background: '#F4EFE6', padding: '64px 40px' }}>
         <div style={{ maxWidth: 820, margin: '0 auto' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 48 }}>
             {opcoes.map((o) => (
               <div key={o.nome} className="reveal">
                 <a href={WA_URL(o.msg)} target="_blank" rel="noopener noreferrer"
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '24px 32px', borderRadius: 4, background: '#fff', border: '1px solid rgba(155,27,27,.1)', textDecoration: 'none', transition: 'all .25s', flexWrap: 'wrap', boxShadow: '0 2px 12px rgba(31,27,22,.06)', cursor: 'pointer' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(155,27,27,.35)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(155,27,27,.1)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}>
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '24px 32px', borderRadius: 4, background: '#fff', border: '1px solid rgba(11,31,58,.1)', textDecoration: 'none', transition: 'all .25s', flexWrap: 'wrap', boxShadow: '0 2px 12px rgba(11,31,58,.06)', cursor: 'pointer' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(11,31,58,.35)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(11,31,58,.1)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}>
                   <div>
-                    <p style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.3rem', fontWeight: 500, color: '#1F1B16', marginBottom: 4 }}>{o.nome}</p>
-                    <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.82rem', color: 'rgba(31,27,22,.5)' }}>{o.capacidade}</p>
+                    <p style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.3rem', fontWeight: 500, color: '#0B1F3A', marginBottom: 4 }}>{o.nome}</p>
+                    <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.82rem', color: 'rgba(11,31,58,.5)' }}>{o.capacidade}</p>
                   </div>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#9B1B1B', color: '#FAF7F2', fontFamily: 'var(--font-lato)', fontSize: '.72rem', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', padding: '10px 20px', borderRadius: 2 }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#0B1F3A', color: '#F4EFE6', fontFamily: 'var(--font-lato)', fontSize: '.72rem', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', padding: '10px 20px', borderRadius: 2 }}>
                     {waIcon} Reservar
                   </span>
                 </a>
@@ -55,13 +55,13 @@ export default function Reservas() {
             ))}
           </div>
 
-          <div className="reveal" style={{ background: 'rgba(155,27,27,.06)', border: '1px solid rgba(155,27,27,.15)', borderRadius: 4, padding: 40, textAlign: 'center' }}>
-            <h3 style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.6rem', fontWeight: 400, color: '#1F1B16', marginBottom: 12 }}>Dúvidas antes de reservar?</h3>
-            <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.9rem', color: 'rgba(31,27,22,.55)', lineHeight: 1.75, marginBottom: 20 }}>
+          <div className="reveal" style={{ background: 'rgba(11,31,58,.06)', border: '1px solid rgba(11,31,58,.15)', borderRadius: 4, padding: 40, textAlign: 'center' }}>
+            <h3 style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.6rem', fontWeight: 400, color: '#0B1F3A', marginBottom: 12 }}>Dúvidas antes de reservar?</h3>
+            <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.9rem', color: 'rgba(11,31,58,.55)', lineHeight: 1.75, marginBottom: 20 }}>
               Fale com a gente antes de decidir. Estamos sempre disponíveis para te ajudar a escolher o quarto certo.
             </p>
             <a href={WA_URL('Olá! Tenho uma dúvida sobre hospedagem na Pousada Romelândia.')} target="_blank" rel="noopener noreferrer"
-              style={{ fontFamily: 'var(--font-lato)', fontSize: '.875rem', fontWeight: 700, color: '#9B1B1B', textDecoration: 'none', letterSpacing: '.05em' }}>
+              style={{ fontFamily: 'var(--font-lato)', fontSize: '.875rem', fontWeight: 700, color: '#0B1F3A', textDecoration: 'none', letterSpacing: '.05em' }}>
               Falar com a equipe →
             </a>
           </div>

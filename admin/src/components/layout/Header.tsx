@@ -2,7 +2,7 @@
 
 import { LogOut, Menu, Users } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+import BrandLogo from '@/components/BrandLogo';
 import { usePathname, useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
@@ -50,10 +50,7 @@ export default function Header() {
         </SheetTrigger>
         <SheetContent side="left" className="w-72">
           <SheetHeader>
-            <SheetTitle className="flex items-center gap-3 font-headline text-xl">
-              <Image src="/logo-pousada.png" alt="" width={36} height={36} className="h-9 w-9 object-contain" />
-              Pousada Romelândia
-            </SheetTitle>
+            <SheetTitle><BrandLogo height={32} /></SheetTitle>
           </SheetHeader>
           <nav className="mt-6 grid gap-1">
             {NAV_ITEMS.map((item) => (
@@ -68,7 +65,7 @@ export default function Header() {
                 <item.icon className="h-5 w-5" />
                 <span className="flex-1">{item.label}</span>
                 {'badge' in item && pending.length > 0 && (
-                  <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">{pending.length}</span>
+                  <span className="rounded-full bg-[#C9A24B] px-2 py-0.5 text-xs font-bold text-[#0B1F3A]">{pending.length}</span>
                 )}
               </Link>
             ))}
@@ -78,7 +75,7 @@ export default function Header() {
       <h1 className="font-headline text-xl text-foreground">{title}</h1>
       <div className="ml-auto flex items-center gap-2">
         {pending.length > 0 && (
-          <Link href="/dashboard/pendentes" className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+          <Link href="/dashboard/pendentes" className="rounded-full bg-[#C9A24B]/25 px-3 py-1 text-xs font-bold text-[#0B1F3A]">
             {pending.length} {pending.length === 1 ? 'solicitação nova' : 'solicitações novas'}
           </Link>
         )}

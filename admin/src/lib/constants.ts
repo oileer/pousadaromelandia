@@ -58,4 +58,4 @@ export const SIGNUP_LINK = `${SITE_URL}/reservar`;
 export const SIGNUP_MESSAGE = `Olá! Para agilizar sua reserva na Pousada Romelândia, faça seu cadastro rápido por este link (entre com o Google e preencha os dados da estadia):
 ${SIGNUP_LINK}
 
-Assim que meu pai confirmar a disponibilidade, a confirmação aparece lá e eu te aviso por aqui.`;
+Assim que confirmarmos a disponibilidade, a confirmação aparece lá e eu te aviso por aqui.`;

@@ -14,7 +14,7 @@ function Stars() {
   return (
     <div style={{ display: 'flex', gap: 3, marginBottom: 16 }}>
       {[1,2,3,4,5].map(i => (
-        <span key={i} style={{ color: '#C8A97A', fontSize: '.9rem' }}>★</span>
+        <span key={i} style={{ color: '#C9A24B', fontSize: '.9rem' }}>★</span>
       ))}
     </div>
   );
@@ -30,8 +30,8 @@ function Card({ name, photo, text }: { name: string; photo: string | null; text:
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? 'rgba(250,247,242,.07)' : 'rgba(250,247,242,.04)',
-        border: `1px solid ${hovered ? 'rgba(250,247,242,.2)' : 'rgba(250,247,242,.1)'}`,
+        background: hovered ? 'rgba(244,239,230,.07)' : 'rgba(244,239,230,.04)',
+        border: `1px solid ${hovered ? 'rgba(244,239,230,.2)' : 'rgba(244,239,230,.1)'}`,
         borderRadius: 4, padding: '28px 24px',
         transition: 'background .25s, border-color .25s',
       }}
@@ -39,26 +39,26 @@ function Card({ name, photo, text }: { name: string; photo: string | null; text:
       <Stars />
       <p style={{
         fontFamily: 'var(--font-cormorant)', fontStyle: 'italic', fontWeight: 300,
-        fontSize: '1.08rem', lineHeight: 1.65, color: 'rgba(250,247,242,.85)',
+        fontSize: '1.08rem', lineHeight: 1.65, color: 'rgba(244,239,230,.85)',
         marginBottom: 24,
       }}>
         &ldquo;{text}&rdquo;
       </p>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, position: 'relative', background: '#9B1B1B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, position: 'relative', background: '#0B1F3A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {photo ? (
             <Image src={photo} alt={name} fill style={{ objectFit: 'cover' }} sizes="44px" />
           ) : (
-            <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.1rem', fontWeight: 500, color: 'rgba(250,247,242,.9)' }}>
+            <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.1rem', fontWeight: 500, color: 'rgba(244,239,230,.9)' }}>
               {initial}
             </span>
           )}
         </div>
         <div>
-          <div style={{ fontFamily: 'var(--font-lato)', fontSize: '.82rem', fontWeight: 700, color: 'rgba(250,247,242,.85)' }}>
+          <div style={{ fontFamily: 'var(--font-lato)', fontSize: '.82rem', fontWeight: 700, color: 'rgba(244,239,230,.85)' }}>
             {name}
           </div>
-          <div style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', color: 'rgba(250,247,242,.4)', marginTop: 1 }}>
+          <div style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', color: 'rgba(244,239,230,.4)', marginTop: 1 }}>
             Google Reviews
           </div>
         </div>
@@ -69,16 +69,16 @@ function Card({ name, photo, text }: { name: string; photo: string | null; text:
 
 export default function TestimonialsSection() {
   return (
-    <section style={{ background: '#1F1B16', padding: '96px 40px' }}>
+    <section style={{ background: '#0B1F3A', padding: '96px 40px' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div className="reveal" style={{ marginBottom: 56 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 14 }}>
-            <div style={{ width: 28, height: 1, background: '#C8A97A' }} />
-            <span style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase' as const, color: '#C8A97A' }}>
+            <div style={{ width: 28, height: 1, background: '#C9A24B' }} />
+            <span style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase' as const, color: '#C9A24B' }}>
               Depoimentos
             </span>
           </div>
-          <h2 style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 300, color: '#FAF7F2', lineHeight: 1.15 }}>
+          <h2 style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 300, color: '#F4EFE6', lineHeight: 1.15 }}>
             O que nossos <em style={{ fontStyle: 'italic' }}>hóspedes dizem</em>
           </h2>
         </div>

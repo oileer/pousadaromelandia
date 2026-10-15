@@ -109,12 +109,12 @@ export default function QuartoPage() {
           style={{ objectFit: "cover", objectPosition: "center" }}
           priority
         />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(31,27,22,0.65) 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(11,31,58,0.65) 100%)" }} />
         <div style={{ position: "absolute", bottom: "2.5rem", left: "50%", transform: "translateX(-50%)", textAlign: "center", color: "#fff" }}>
           <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.7, marginBottom: "0.5rem" }}>
             Pousada Romelândia
           </p>
-          <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2.2rem, 6vw, 4rem)", fontWeight: 400, lineHeight: 1.1 }}>
+          <h1 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(2.2rem, 6vw, 4rem)", fontWeight: 400, lineHeight: 1.1 }}>
             {quarto.nome}
           </h1>
           <span style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.1em", background: "var(--accent)", padding: "0.25rem 0.9rem", borderRadius: "2px", display: "inline-block", marginTop: "0.75rem" }}>
@@ -151,7 +151,7 @@ export default function QuartoPage() {
                     <div
                       key={idx}
                       onClick={() => setLightboxIdx(idx)}
-                      style={{ borderRadius: "4px", overflow: "hidden", position: "relative", height: "200px", cursor: "zoom-in", boxShadow: "0 2px 12px rgba(31,27,22,0.12)" }}
+                      style={{ borderRadius: "4px", overflow: "hidden", position: "relative", height: "200px", cursor: "zoom-in", boxShadow: "0 2px 12px rgba(11,31,58,0.12)" }}
                       className="img-zoom"
                     >
                       <Image src={foto} alt={`${quarto.nome} — foto ${idx + 1}`} fill style={{ objectFit: "cover" }} />
@@ -166,7 +166,7 @@ export default function QuartoPage() {
             )}
 
             {/* Descrição */}
-            <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.8rem", fontWeight: 500, color: "var(--text)", marginBottom: "1rem" }}>
+            <h2 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "1.8rem", fontWeight: 500, color: "var(--text)", marginBottom: "1rem" }}>
               Sobre o quarto
             </h2>
             <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.95rem", lineHeight: 1.85, color: "var(--text-muted)", marginBottom: "2rem" }}>
@@ -195,12 +195,12 @@ export default function QuartoPage() {
 
           {/* Direita: card de reserva */}
           <div style={{ position: "sticky", top: "100px" }}>
-            <div style={{ background: "white", borderRadius: "8px", border: "1px solid var(--line)", boxShadow: "0 8px 40px rgba(31,27,22,0.1)", overflow: "hidden" }}>
+            <div style={{ background: "white", borderRadius: "8px", border: "1px solid var(--line)", boxShadow: "0 8px 40px rgba(11,31,58,0.1)", overflow: "hidden" }}>
               <div style={{ background: "var(--accent)", padding: "1.5rem 1.75rem", color: "white" }}>
                 <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", opacity: 0.8, marginBottom: "0.4rem" }}>
                   {quarto.nome}
                 </p>
-                <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.5rem", fontWeight: 400, lineHeight: 1.2 }}>
+                <p style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "1.5rem", fontWeight: 400, lineHeight: 1.2 }}>
                   {quarto.capacidade}
                 </p>
               </div>
@@ -271,12 +271,12 @@ export default function QuartoPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem" }}>
             {QUARTOS.filter(q => q.id !== quarto.id).map(q => (
               <Link key={q.id} href={`/quartos/${q.id}`} style={{ textDecoration: "none" }}>
-                <div style={{ borderRadius: "6px", overflow: "hidden", boxShadow: "0 2px 12px rgba(31,27,22,0.08)", transition: "transform 0.2s, box-shadow 0.2s" }} className="img-zoom">
+                <div style={{ borderRadius: "6px", overflow: "hidden", boxShadow: "0 2px 12px rgba(11,31,58,0.08)", transition: "transform 0.2s, box-shadow 0.2s" }} className="img-zoom">
                   <div style={{ position: "relative", height: "140px" }}>
                     <Image src={q.fotos[0]} alt={q.nome} fill style={{ objectFit: "cover" }} />
                   </div>
                   <div style={{ background: "white", padding: "0.85rem 1rem" }}>
-                    <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.1rem", fontWeight: 500, color: "var(--text)", marginBottom: "0.2rem" }}>{q.nome}</p>
+                    <p style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "1.1rem", fontWeight: 500, color: "var(--text)", marginBottom: "0.2rem" }}>{q.nome}</p>
                     <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.75rem", color: "var(--text-muted)" }}>{q.capacidade}</p>
                   </div>
                 </div>

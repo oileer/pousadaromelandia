@@ -2,21 +2,22 @@
 
 /* ── CSS Variables ─────────────────────────── */
 :root {
-  --cream:      #FAF7F2;
-  --cream-alt:  #F1ECE3;
-  --accent:     #9B1B1B;
-  --accent-dark:#7a1414;
-  --accent-soft:rgba(155,27,27,0.08);
-  --gold:       #C8A97A;
-  --text:       #1F1B16;
-  --text-muted: #6B6258;
-  --text-light: #9A9082;
+  --font-brand: var(--font-cormorant);
+  --cream:      #F4EFE6;
+  --cream-alt:  #EAE3D6;
+  --accent:     #0B1F3A;
+  --accent-dark:#07162B;
+  --accent-soft:rgba(11,31,58,0.08);
+  --gold:       #C9A24B;
+  --text:       #0B1F3A;
+  --text-muted: #566178;
+  --text-light: #8A93A3;
   --white:      #FFFFFF;
-  --line:       #E5DED1;
-  --dark:       #1F1B16;
-  --shadow-sm:  0 4px 20px rgba(31,27,22,0.05);
-  --shadow-md:  0 12px 40px rgba(31,27,22,0.09);
-  --shadow-lg:  0 24px 60px rgba(31,27,22,0.13);
+  --line:       #DDD5C4;
+  --dark:       #0B1F3A;
+  --shadow-sm:  0 4px 20px rgba(11,31,58,0.05);
+  --shadow-md:  0 12px 40px rgba(11,31,58,0.09);
+  --shadow-lg:  0 24px 60px rgba(11,31,58,0.13);
 
   /* backwards compat */
   --wine:      var(--accent);
@@ -101,7 +102,7 @@ body::after {
 }
 
 /* ── Typography ────────────────────────────── */
-.display { font-family: 'Cormorant Garamond', Georgia, serif; line-height: 1.12; }
+.display { font-family: var(--font-cormorant), Georgia, serif; line-height: 1.12; }
 .body-font { font-family: 'Lato', Arial, sans-serif; }
 
 .section-label {
@@ -120,7 +121,7 @@ body::after {
 /* ── Buttons ───────────────────────────────── */
 .btn-wine {
   display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--accent); color: #FAF7F2;
+  background: var(--accent); color: #F4EFE6;
   font-family: 'Lato', Arial, sans-serif;
   font-weight: 700; font-size: 0.82rem;
   letter-spacing: 0.1em; text-transform: uppercase;
@@ -132,7 +133,7 @@ body::after {
 .btn-wine:hover {
   background: var(--accent-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(155,27,27,0.3);
+  box-shadow: 0 8px 30px rgba(11,31,58,0.3);
 }
 .btn-outline {
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -144,7 +145,7 @@ body::after {
   border: 1.5px solid var(--accent); text-decoration: none;
   transition: all 0.25s; cursor: pointer;
 }
-.btn-outline:hover { background: var(--accent); color: #FAF7F2; transform: translateY(-2px); }
+.btn-outline:hover { background: var(--accent); color: #F4EFE6; transform: translateY(-2px); }
 
 /* ── Cards (legacy pages) ──────────────────── */
 .card {
@@ -168,14 +169,14 @@ body::after {
 }
 
 .stat-num {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-cormorant), Georgia, serif;
   font-size: clamp(2rem, 4vw, 3rem);
   color: var(--wine); line-height: 1;
 }
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(155,27,27,0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(11,31,58,0.15), transparent);
 }
 .nav-link-active { color: var(--accent) !important; }
 
@@ -186,7 +187,7 @@ body::after {
 
 /* ── Room card (new) ────────────────────────── */
 .room-card-hover { transition: transform .3s ease, box-shadow .3s ease !important; }
-.room-card-hover:hover { transform: translateY(-4px) !important; box-shadow: 0 16px 48px rgba(31,27,22,.16) !important; }
+.room-card-hover:hover { transform: translateY(-4px) !important; box-shadow: 0 16px 48px rgba(11,31,58,.16) !important; }
 .room-card-hover .room-img-inner { transition: transform .5s ease !important; }
 .room-card-hover:hover .room-img-inner { transform: scale(1.04) !important; }
 
@@ -211,10 +212,10 @@ body::after {
 .nav-mobile-menu   {
   display: none;
   position: fixed; top: 72px; left: 0; right: 0;
-  background: rgba(250,247,242,.98); backdrop-filter: blur(14px);
+  background: rgba(244,239,230,.98); backdrop-filter: blur(14px);
   flex-direction: column;
   padding: 16px 24px 24px;
-  border-bottom: 1px solid rgba(31,27,22,.1);
+  border-bottom: 1px solid rgba(11,31,58,.1);
   z-index: 99; gap: 4px;
 }
 .nav-mobile-menu.open { display: flex; }
@@ -239,7 +240,7 @@ body::after {
 
 /* Stats */
 .stats-band {
-  background: #1F1B16; padding: 36px 40px;
+  background: #0B1F3A; padding: 36px 40px;
   display: flex; justify-content: center;
 }
 
@@ -264,7 +265,7 @@ body::after {
   max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: 2fr 1fr 1fr;
   gap: 60px; padding-bottom: 40px;
-  border-bottom: 1px solid rgba(250,247,242,.08);
+  border-bottom: 1px solid rgba(244,239,230,.08);
 }
 
 /* Section horizontal padding */
@@ -287,7 +288,7 @@ body::after {
     display: flex !important;
     align-items: center; justify-content: center;
     background: none; border: none; cursor: pointer;
-    padding: 8px; color: #1F1B16;
+    padding: 8px; color: #0B1F3A;
   }
   .nav-mobile-menu { display: none; }
   .nav-mobile-menu.open { display: flex; }
@@ -307,7 +308,7 @@ body::after {
 
   /* Stats */
   .stats-band { padding: 24px 20px !important; flex-wrap: wrap !important; }
-  .stats-band-item { flex: 0 0 50% !important; max-width: 50% !important; border-left: none !important; border-top: 1px solid rgba(250,247,242,.12); padding: 16px 8px !important; }
+  .stats-band-item { flex: 0 0 50% !important; max-width: 50% !important; border-left: none !important; border-top: 1px solid rgba(244,239,230,.12); padding: 16px 8px !important; }
   .stats-band-item:nth-child(odd) { border-top: none; }
   .stats-band-item:nth-child(1),
   .stats-band-item:nth-child(2) { border-top: none; }

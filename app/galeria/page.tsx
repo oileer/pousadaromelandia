@@ -83,7 +83,7 @@ export default function Galeria() {
               <span style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--accent)", display: "block", marginBottom: "0.5rem" }}>
                 Pousada Romelândia
               </span>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2rem, 5vw, 3.2rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.1 }}>
+              <h1 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(2rem, 5vw, 3.2rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.1 }}>
                 Galeria de Fotos
               </h1>
               <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
@@ -149,16 +149,16 @@ export default function Galeria() {
                   cursor: "zoom-in",
                   position: "relative",
                   lineHeight: 0,
-                  boxShadow: "0 2px 12px rgba(31,27,22,0.1)",
+                  boxShadow: "0 2px 12px rgba(11,31,58,0.1)",
                   transition: "transform 0.2s, box-shadow 0.2s",
                 }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.transform = "scale(1.02)"
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(31,27,22,0.2)"
+                  ;(e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(11,31,58,0.2)"
                 }}
                 onMouseLeave={e => {
                   (e.currentTarget as HTMLElement).style.transform = "scale(1)"
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = "0 2px 12px rgba(31,27,22,0.1)"
+                  ;(e.currentTarget as HTMLElement).style.boxShadow = "0 2px 12px rgba(11,31,58,0.1)"
                 }}
               >
                 <Image
@@ -171,13 +171,13 @@ export default function Galeria() {
                 {/* Hover overlay */}
                 <div style={{
                   position: "absolute", inset: 0,
-                  background: "rgba(31,27,22,0)",
+                  background: "rgba(11,31,58,0)",
                   transition: "background 0.2s",
                   display: "flex", alignItems: "flex-end",
                   padding: "1rem",
                 }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(31,27,22,0.4)"}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "rgba(31,27,22,0)"}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(11,31,58,0.4)"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "rgba(11,31,58,0)"}
                 >
                   {foto.quarto && (
                     <span style={{

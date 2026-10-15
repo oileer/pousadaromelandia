@@ -164,14 +164,14 @@ export default function BookingWidget() {
 }
 
 /* ── Estilos compartilhados ── */
-const serif: React.CSSProperties = { fontFamily: "'Cormorant Garamond', Georgia, serif" }
+const serif: React.CSSProperties = { fontFamily: "var(--font-cormorant), Georgia, serif" }
 const sans:  React.CSSProperties = { fontFamily: "Lato, Arial, sans-serif" }
 
 const widgetWrap: React.CSSProperties = {
-  background: "rgba(250,247,242,0.97)",
+  background: "rgba(244,239,230,0.97)",
   backdropFilter: "blur(16px)",
   borderRadius: "8px",
-  boxShadow: "0 24px 80px rgba(31,27,22,0.25), 0 4px 16px rgba(31,27,22,0.1)",
+  boxShadow: "0 24px 80px rgba(11,31,58,0.25), 0 4px 16px rgba(11,31,58,0.1)",
   width: "100%",
   border: "1px solid rgba(229,222,209,0.6)",
 }

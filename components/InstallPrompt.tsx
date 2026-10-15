@@ -51,8 +51,8 @@ export default function InstallPrompt({ name, color = '#0B1F3A' }: { name: strin
 
   return (
     <div role="dialog" aria-label="Instalar aplicativo" style={{
-      position: 'fixed', left: 12, right: 12, bottom: 12, zIndex: 9999, background: '#fff', color: '#1F1B16',
-      border: '1px solid #E5DED1', borderRadius: 12, padding: '14px 14px 14px 16px', boxShadow: '0 12px 40px rgba(31,27,22,.25)',
+      position: 'fixed', left: 12, right: 12, bottom: 12, zIndex: 9999, background: '#fff', color: '#0B1F3A',
+      border: '1px solid #DDD5C4', borderRadius: 12, padding: '14px 14px 14px 16px', boxShadow: '0 12px 40px rgba(11,31,58,.25)',
       display: 'flex', alignItems: 'center', gap: 12, fontFamily: 'Lato, Arial, sans-serif',
     }}>
       <img src="/icon-192.png" alt="" width={44} height={44} style={{ borderRadius: 10, flex: 'none' }} />
@@ -67,7 +67,7 @@ export default function InstallPrompt({ name, color = '#0B1F3A' }: { name: strin
           Instalar
         </button>
       )}
-      <button onClick={dismiss} aria-label="Agora não" style={{ background: 'none', border: 0, fontSize: 22, lineHeight: 1, color: '#6B6258', flex: 'none', padding: 4 }}>×</button>
+      <button onClick={dismiss} aria-label="Agora não" style={{ background: 'none', border: 0, fontSize: 22, lineHeight: 1, color: '#566178', flex: 'none', padding: 4 }}>×</button>
     </div>
   );
 }

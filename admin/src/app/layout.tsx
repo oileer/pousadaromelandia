@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Lato } from 'next/font/google';
+import { Playfair_Display, Lato } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import InstallPrompt from '@/components/InstallPrompt';
 
-const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-cormorant' });
+const cormorant = Playfair_Display({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-cormorant' });
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-lato' });
 
 export const metadata: Metadata = {
