@@ -4,6 +4,7 @@ import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type 
 import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, serverTimestamp, setDoc, where } from "firebase/firestore"
 import { auth, db } from "@/lib/firebase"
 import { TOTAL_ROOMS, WA_URL } from "@/lib/config"
+import InstallPrompt from "@/components/InstallPrompt"
 
 type Status = "pendente" | "confirmada" | "hospedada" | "concluida" | "cancelada"
 interface Mine {
@@ -19,6 +20,23 @@ const label: React.CSSProperties = { ...sans, display: "block", fontSize: ".7rem
 const input: React.CSSProperties = { ...sans, width: "100%", padding: ".7rem .85rem", background: "var(--cream-alt)", border: "1px solid var(--line)", borderRadius: 4, fontSize: ".95rem", color: "var(--text)" }
 const btn: React.CSSProperties = { ...sans, background: "var(--accent)", color: "#fff", border: 0, borderRadius: 4, padding: ".85rem 1.6rem", fontSize: ".8rem", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", cursor: "pointer" }
 
+const maskPhone = (v: string) => {
+  const d = v.replace(/\D/g, "").slice(0, 11)
+  if (d.length <= 2) return d
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
+}
+const maskCpf = (v: string) => {
+  const d = v.replace(/\D/g, "").slice(0, 11)
+  return d.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4")
+}
+const errText = (e: unknown, fallback: string) => {
+  const code = (e as { code?: string })?.code ?? ""
+  if (code.includes("permission-denied")) return "Sem permissão para salvar. Avise a pousada pelo WhatsApp (o cadastro ainda está sendo configurado)."
+  if (code.includes("unavailable") || code.includes("network")) return "Sem conexão. Verifique a internet e tente de novo."
+  return fallback
+}
 const fmt = (d: string) => new Date(d + "T12:00:00").toLocaleDateString("pt-BR")
 const STATUS_TXT: Record<Status, { t: string; c: string; d: string }> = {
   pendente: { t: "Aguardando confirmação", c: "#8a6a00", d: "Recebemos seu pedido. Assim que confirmarmos a disponibilidade você é avisado aqui e no WhatsApp." },
@@ -35,6 +53,7 @@ export default function ReservarClient() {
   const [err, setErr] = useState("")
   const [busy, setBusy] = useState(false)
   const [showForm, setShowForm] = useState(false)
+  const [sent, setSent] = useState(false)
 
   useEffect(() => onAuthStateChanged(auth, u => setUser(u)), [])
 
@@ -51,7 +70,11 @@ export default function ReservarClient() {
   async function login() {
     setErr("")
     try { await signInWithPopup(auth, new GoogleAuthProvider()) }
-    catch (e) { setErr(e instanceof Error && /popup-closed/.test(e.message) ? "" : "Não foi possível entrar com o Google. Tente de novo ou fale pelo WhatsApp.") }
+    catch (e) {
+      console.error("login google:", e)
+      const code = (e as { code?: string })?.code ?? ""
+      setErr(/popup-closed|cancelled-popup/.test(code) ? "" : code.includes("popup-blocked") ? "O navegador bloqueou a janela do Google. Libere pop-ups para este site e tente de novo." : "Não foi possível entrar com o Google. Tente de novo ou fale pelo WhatsApp.")
+    }
   }
 
   async function saveProfile(e: React.FormEvent<HTMLFormElement>) {
@@ -65,9 +88,10 @@ export default function ReservarClient() {
       city: String(fd.get("city") ?? "").trim(),
     }
     if (p.name.length < 2 || p.phone.replace(/\D/g, "").length < 10) { setErr("Confira o nome e o WhatsApp com DDD."); return }
+    if (p.document && p.document.replace(/\D/g, "").length !== 11) { setErr("O CPF precisa ter 11 números (ou deixe em branco)."); return }
     setBusy(true); setErr("")
     try { await setDoc(doc(db, "guests", user.uid), { ...p, email: user.email ?? "", updatedAt: serverTimestamp() }); setProfile(p); setShowForm(true) }
-    catch { setErr("Não foi possível salvar. Tente novamente.") }
+    catch (e) { console.error("salvar perfil:", e); setErr(errText(e, "Não foi possível salvar. Tente novamente.")) }
     setBusy(false)
   }
 
@@ -99,9 +123,9 @@ export default function ReservarClient() {
         notes: String(fd.get("notes") ?? "").trim().slice(0, 500) || "Reserva pelo link de cadastro",
         status: "pendente", origem: "link", createdAt: serverTimestamp(),
       })
-      setShowForm(false)
-      ;(e.target as HTMLFormElement).reset()
-    } catch { setErr("Não foi possível enviar agora. Tente de novo ou fale pelo WhatsApp.") }
+      setShowForm(false); setSent(true)
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } catch (e) { console.error("enviar pedido:", e); setErr(errText(e, "Não foi possível enviar agora. Tente de novo ou fale pelo WhatsApp.")) }
     setBusy(false)
   }
 
@@ -135,6 +159,8 @@ export default function ReservarClient() {
             {user.email} · <button onClick={() => signOut(auth)} style={{ background: "none", border: 0, color: "var(--accent)", cursor: "pointer", textDecoration: "underline", fontSize: ".8rem" }}>sair</button>
           </p>
 
+          {sent && <p style={{ ...sans, background: "#e8f5ec", color: "#1f7a3d", padding: ".8rem 1rem", borderRadius: 6, marginBottom: "1rem", fontSize: ".9rem" }}>Pedido enviado! Acompanhe a confirmação logo abaixo.</p>}
+
           {open.map(m => {
             const s = STATUS_TXT[m.status]
             return (
@@ -150,12 +176,14 @@ export default function ReservarClient() {
             )
           })}
 
+          {profile === undefined && <p style={{ ...sans, textAlign: "center", color: "var(--text-muted)" }}>Carregando seus dados…</p>}
+
           {profile === null && (
             <form onSubmit={saveProfile} style={{ ...card, display: "grid", gap: "1rem" }}>
               <h2 style={{ ...serif, fontSize: "1.6rem", fontWeight: 500 }}>Seus dados</h2>
               <div><label style={label}>Nome completo</label><input name="name" required defaultValue={user.displayName ?? ""} style={input} /></div>
-              <div><label style={label}>WhatsApp (com DDD)</label><input name="phone" type="tel" required placeholder="(49) 9 9999-9999" style={input} /></div>
-              <div><label style={label}>CPF <span style={{ fontWeight: 400, opacity: .6 }}>(opcional, agiliza o check-in)</span></label><input name="document" inputMode="numeric" maxLength={14} style={input} /></div>
+              <div><label style={label}>WhatsApp (com DDD)</label><input name="phone" type="tel" required placeholder="(49) 99999-9999" autoComplete="tel" onChange={e => { e.target.value = maskPhone(e.target.value) }} style={input} /></div>
+              <div><label style={label}>CPF <span style={{ fontWeight: 400, opacity: .6 }}>(opcional, agiliza o check-in)</span></label><input name="document" inputMode="numeric" maxLength={14} placeholder="000.000.000-00" onChange={e => { e.target.value = maskCpf(e.target.value) }} style={input} /></div>
               <div><label style={label}>Cidade <span style={{ fontWeight: 400, opacity: .6 }}>(opcional)</span></label><input name="city" style={input} /></div>
               {err && <p style={{ ...sans, color: "var(--accent)", fontSize: ".85rem" }}>{err}</p>}
               <button disabled={busy} style={btn}>{busy ? "Salvando…" : "Continuar"}</button>
@@ -191,6 +219,7 @@ export default function ReservarClient() {
           )}
         </>
       )}
+      <InstallPrompt name="Pousada Romelândia" />
     </section>
   )
 }
