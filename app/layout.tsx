@@ -1,14 +1,15 @@
 import type { Metadata } from "next"
-import { Cormorant_Garamond, Lato } from "next/font/google"
+import { Playfair_Display, Lato } from "next/font/google"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import ScrollReveal from "@/components/ScrollReveal"
 import WhatsAppFAB from "@/components/WhatsAppFAB"
+import SiteFx from "@/components/SiteFx"
 import "./globals.css"
 
-const cormorant = Cormorant_Garamond({
+const cormorant = Playfair_Display({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-cormorant",
   display: "swap",
@@ -20,6 +21,8 @@ const lato = Lato({
   variable: "--font-lato",
   display: "swap",
 })
+
+export const viewport = { themeColor: "#0B1F3A" }
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pousadaromelandia.vercel.app"),
@@ -40,6 +43,9 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "https://www.pousadaromelandia.com.br" },
   robots: { index: true, follow: true },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: { capable: true, title: "Pousada Romelândia", statusBarStyle: "default" },
+  icons: { apple: "/icon-192.png" },
 }
 
 const schemaOrg = {
@@ -80,13 +86,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }} />
       </head>
-      <body style={{ background: "#FAF7F2", color: "#1F1B16", overflowX: "hidden" }}>
+      <body style={{ background: "#F4EFE6", color: "#0B1F3A", overflowX: "hidden" }}>
         <Navbar />
         <main>
           {children}
         </main>
         <Footer />
         <ScrollReveal />
+        <SiteFx />
         <WhatsAppFAB />
       </body>
     </html>

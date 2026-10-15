@@ -25,12 +25,12 @@ export default function RoomCard({ name, slug, imageSrc, capacity, tags, waMessa
 
   return (
     <article
-      className="room-card-hover"
+      className="room-card-hover fx-card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         background: "#fff", borderRadius: 2, overflow: "hidden",
-        boxShadow: hovered ? "0 16px 48px rgba(31,27,22,.16)" : "0 2px 12px rgba(31,27,22,.07)",
+        boxShadow: hovered ? "0 16px 48px rgba(11,31,58,.16)" : "0 2px 12px rgba(11,31,58,.07)",
         transform: hovered ? "translateY(-4px)" : "none",
         transition: "transform .3s ease, box-shadow .3s ease",
       }}
@@ -44,13 +44,13 @@ export default function RoomCard({ name, slug, imageSrc, capacity, tags, waMessa
         }}>
           <Image src={imageSrc} alt={name} fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 100vw, 33vw" />
         </div>
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(31,27,22,.48) 0%, transparent 50%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(11,31,58,.48) 0%, transparent 50%)" }} />
         <div style={{
           position: "absolute", top: 14, right: 14,
-          background: "rgba(250,247,242,.92)", backdropFilter: "blur(6px)",
+          background: "rgba(244,239,230,.92)", backdropFilter: "blur(6px)",
           padding: "4px 10px", borderRadius: 40,
           fontFamily: "var(--font-lato)", fontSize: ".66rem", fontWeight: 700,
-          letterSpacing: ".08em", textTransform: "uppercase" as const, color: "#1F1B16",
+          letterSpacing: ".08em", textTransform: "uppercase" as const, color: "#0B1F3A",
         }}>
           {capacity}
         </div>
@@ -58,14 +58,14 @@ export default function RoomCard({ name, slug, imageSrc, capacity, tags, waMessa
 
       {/* Body */}
       <div style={{ padding: "22px 24px 16px" }}>
-        <h3 style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.42rem", fontWeight: 500, color: "#1F1B16", marginBottom: 10, lineHeight: 1.2 }}>
+        <h3 style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.42rem", fontWeight: 500, color: "#0B1F3A", marginBottom: 10, lineHeight: 1.2 }}>
           {name}
         </h3>
         <div style={{ display: "flex", flexWrap: "wrap" as const, gap: 6 }}>
           {tags.map(tag => (
             <span key={tag} style={{
               fontFamily: "var(--font-lato)", fontSize: ".68rem", fontWeight: 400,
-              color: "rgba(31,27,22,.52)", background: "#F0EAE0",
+              color: "rgba(11,31,58,.52)", background: "#EAE3D6",
               padding: "3px 10px", borderRadius: 2,
             }}>
               {tag}
@@ -75,28 +75,28 @@ export default function RoomCard({ name, slug, imageSrc, capacity, tags, waMessa
       </div>
 
       {/* Footer */}
-      <div style={{ display: "flex", gap: 10, padding: "14px 24px", borderTop: "1px solid rgba(31,27,22,.07)" }}>
+      <div style={{ display: "flex", gap: 10, padding: "14px 24px", borderTop: "1px solid rgba(11,31,58,.07)" }}>
         <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{
-          flex: 1, background: "#9B1B1B", color: "#FAF7F2",
+          flex: 1, background: "#0B1F3A", color: "#F4EFE6",
           fontFamily: "var(--font-lato)", fontSize: ".7rem", fontWeight: 700,
           letterSpacing: ".1em", textTransform: "uppercase" as const,
           padding: "11px 14px", borderRadius: 2, textDecoration: "none",
           display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
           transition: "background .2s",
         }}
-          onMouseEnter={e => (e.currentTarget.style.background = "#7a1414")}
-          onMouseLeave={e => (e.currentTarget.style.background = "#9B1B1B")}>
+          onMouseEnter={e => (e.currentTarget.style.background = "#07162B")}
+          onMouseLeave={e => (e.currentTarget.style.background = "#0B1F3A")}>
           {WA_ICON} Reservar
         </a>
         <Link href={`/quartos/${slug}`} style={{
           padding: "11px 14px", borderRadius: 2,
-          border: "1px solid rgba(31,27,22,.15)",
+          border: "1px solid rgba(11,31,58,.15)",
           fontFamily: "var(--font-lato)", fontSize: ".7rem", fontWeight: 700,
-          letterSpacing: ".1em", textTransform: "uppercase" as const, color: "rgba(31,27,22,.55)",
+          letterSpacing: ".1em", textTransform: "uppercase" as const, color: "rgba(11,31,58,.55)",
           textDecoration: "none", transition: "border-color .2s, color .2s",
         }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = "#1F1B16"; e.currentTarget.style.color = "#1F1B16" }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(31,27,22,.15)"; e.currentTarget.style.color = "rgba(31,27,22,.55)" }}>
+          onMouseEnter={e => { e.currentTarget.style.borderColor = "#0B1F3A"; e.currentTarget.style.color = "#0B1F3A" }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(11,31,58,.15)"; e.currentTarget.style.color = "rgba(11,31,58,.55)" }}>
           Detalhes
         </Link>
       </div>

@@ -76,7 +76,7 @@ function QuartoCard({ q, index }: { q: typeof quartos[0]; index: number }) {
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        style={{ background: "white", borderRadius: "6px", overflow: "hidden", boxShadow: hovered ? "0 20px 60px rgba(31,27,22,0.18)" : "0 4px 20px rgba(31,27,22,0.08)", transition: "box-shadow 0.35s ease", display: "flex", flexDirection: "column" }}
+        style={{ background: "white", borderRadius: "6px", overflow: "hidden", boxShadow: hovered ? "0 20px 60px rgba(11,31,58,0.18)" : "0 4px 20px rgba(11,31,58,0.08)", transition: "box-shadow 0.35s ease", display: "flex", flexDirection: "column" }}
       >
         {/* Foto */}
         <Link href={`/quartos/${q.id}`} style={{ display: "block", position: "relative", height: "280px", overflow: "hidden", flexShrink: 0 }}>
@@ -89,7 +89,7 @@ function QuartoCard({ q, index }: { q: typeof quartos[0]; index: number }) {
           {/* Overlay hover */}
           <div style={{
             position: "absolute", inset: 0,
-            background: hovered ? "rgba(31,27,22,0.38)" : "rgba(31,27,22,0)",
+            background: hovered ? "rgba(11,31,58,0.38)" : "rgba(11,31,58,0)",
             transition: "background 0.35s ease",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
@@ -122,7 +122,7 @@ function QuartoCard({ q, index }: { q: typeof quartos[0]; index: number }) {
         <div style={{ padding: "1.75rem", display: "flex", flexDirection: "column", flex: 1 }}>
           {/* Nome + sub */}
           <div style={{ marginBottom: "1rem" }}>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.6rem", fontWeight: 500, color: "var(--text)", lineHeight: 1.15, marginBottom: "0.3rem" }}>
+            <h2 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "1.6rem", fontWeight: 500, color: "var(--text)", lineHeight: 1.15, marginBottom: "0.3rem" }}>
               {q.nome}
             </h2>
             <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.8rem", color: "var(--text-muted)", fontStyle: "italic" }}>
@@ -195,12 +195,12 @@ export default function Quartos() {
         {/* Faixa de foto full-width */}
         <div style={{ position: "relative", height: "340px", overflow: "hidden", marginTop: "72px" }}>
           <Image src="/assets/Corredores/1.jpeg" alt="Acomodações Pousada Romelândia" fill style={{ objectFit: "cover", objectPosition: "center 40%" }} priority />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(31,27,22,0.3) 0%, rgba(31,27,22,0.7) 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(11,31,58,0.3) 0%, rgba(11,31,58,0.7) 100%)" }} />
           <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", color: "white", padding: "0 2rem" }}>
             <span style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.7, marginBottom: "0.75rem", display: "block" }}>
               Pousada Romelândia · Romelândia SC
             </span>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2.2rem, 6vw, 4rem)", fontWeight: 400, lineHeight: 1.05, textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}>
+            <h1 style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "clamp(2.2rem, 6vw, 4rem)", fontWeight: 400, lineHeight: 1.05, textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}>
               Nossas Acomodações
             </h1>
             <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.95rem", fontWeight: 300, opacity: 0.85, maxWidth: "480px", lineHeight: 1.7, marginTop: "0.75rem" }}>
@@ -219,7 +219,7 @@ export default function Quartos() {
               { label: "Estacionamento", val: "Gratuito" },
             ].map(item => (
               <div key={item.label} style={{ textAlign: "center" }}>
-                <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.3rem", fontWeight: 500 }}>{item.val}</div>
+                <div style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "1.3rem", fontWeight: 500 }}>{item.val}</div>
                 <div style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.75, marginTop: "0.15rem" }}>{item.label}</div>
               </div>
             ))}
@@ -250,7 +250,7 @@ export default function Quartos() {
 
           {/* Nota inferior */}
           <div style={{ textAlign: "center", marginTop: "4rem", padding: "2.5rem", background: "white", borderRadius: "6px", border: "1px solid var(--line)" }}>
-            <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.3rem", fontWeight: 400, color: "var(--text)", marginBottom: "0.5rem" }}>
+            <p style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontSize: "1.3rem", fontWeight: 400, color: "var(--text)", marginBottom: "0.5rem" }}>
               Dúvidas ou preferências especiais?
             </p>
             <p style={{ fontFamily: "Lato, Arial, sans-serif", fontSize: "0.85rem", color: "var(--text-muted)", marginBottom: "1.5rem", lineHeight: 1.7 }}>

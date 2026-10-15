@@ -48,23 +48,23 @@ export default function HomePage() {
       <AboutSection />
 
       {/* Quartos */}
-      <section style={{ padding: '96px 40px', background: '#FAF7F2' }}>
+      <section style={{ padding: '96px 40px', background: '#F4EFE6' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="reveal" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 48, flexWrap: 'wrap', gap: 16 }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 14 }}>
-                <div style={{ width: 28, height: 1, background: '#9B1B1B' }} />
-                <span style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#9B1B1B' }}>
+                <div style={{ width: 28, height: 1, background: '#0B1F3A' }} />
+                <span style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#0B1F3A' }}>
                   Acomodações
                 </span>
               </div>
-              <h2 style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 300, color: '#1F1B16', lineHeight: 1.15 }}>
+              <h2 style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 300, color: '#0B1F3A', lineHeight: 1.15 }}>
                 Nossas <em style={{ fontStyle: 'italic' }}>Acomodações</em>
               </h2>
             </div>
             <a
               href="/quartos"
-              style={{ fontFamily: 'var(--font-lato)', fontSize: '.78rem', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: '#9B1B1B', borderBottom: '1px solid #9B1B1B', paddingBottom: 2, textDecoration: 'none' }}
+              style={{ fontFamily: 'var(--font-lato)', fontSize: '.78rem', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: '#0B1F3A', borderBottom: '1px solid #0B1F3A', paddingBottom: 2, textDecoration: 'none' }}
             >
               Ver todos os quartos →
             </a>

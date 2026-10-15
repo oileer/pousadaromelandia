@@ -47,44 +47,44 @@ const infos = [
 export default function Contato() {
   return (
     <>
-      <section style={{ paddingTop: 110, paddingBottom: 56, background: '#FAF7F2' }}>
+      <section style={{ paddingTop: 110, paddingBottom: 56, background: '#F4EFE6' }}>
         <div style={{ maxWidth: 800, margin: '0 auto', padding: '0 40px', textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 16 }}>
-            <div style={{ width: 28, height: 1, background: '#9B1B1B' }} />
-            <span style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#9B1B1B' }}>Contato</span>
-            <div style={{ width: 28, height: 1, background: '#9B1B1B' }} />
+            <div style={{ width: 28, height: 1, background: '#0B1F3A' }} />
+            <span style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: '#0B1F3A' }}>Contato</span>
+            <div style={{ width: 28, height: 1, background: '#0B1F3A' }} />
           </div>
-          <h1 style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#1F1B16', lineHeight: 1.1, marginBottom: 16 }}>
+          <h1 style={{ fontFamily: 'var(--font-cormorant)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#0B1F3A', lineHeight: 1.1, marginBottom: 16 }}>
             Fale Conosco
           </h1>
-          <p style={{ fontFamily: 'var(--font-lato)', fontSize: '1rem', color: 'rgba(31,27,22,.55)', lineHeight: 1.75 }}>
+          <p style={{ fontFamily: 'var(--font-lato)', fontSize: '1rem', color: 'rgba(11,31,58,.55)', lineHeight: 1.75 }}>
             Estamos sempre disponíveis para atendê-lo. Fale pelo WhatsApp ou nos encontre no centro de Romelândia.
           </p>
         </div>
       </section>
 
-      <section style={{ background: '#FAF7F2', padding: '64px 40px' }}>
+      <section style={{ background: '#F4EFE6', padding: '64px 40px' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20, marginBottom: 56 }}>
             {infos.map((info) => (
               <div key={info.label} className="reveal">
                 {info.href ? (
                   <a href={info.href} target="_blank" rel="noopener noreferrer"
-                    style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 28, borderRadius: 4, background: '#fff', border: '1px solid rgba(155,27,27,.1)', textDecoration: 'none', transition: 'all .25s', boxShadow: '0 2px 12px rgba(31,27,22,.06)', cursor: 'pointer' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(155,27,27,.35)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(155,27,27,.1)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}>
-                    <div style={{ color: '#9B1B1B' }}>{info.icon}</div>
+                    style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 28, borderRadius: 4, background: '#fff', border: '1px solid rgba(11,31,58,.1)', textDecoration: 'none', transition: 'all .25s', boxShadow: '0 2px 12px rgba(11,31,58,.06)', cursor: 'pointer' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(11,31,58,.35)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(11,31,58,.1)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}>
+                    <div style={{ color: '#0B1F3A' }}>{info.icon}</div>
                     <div>
-                      <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(31,27,22,.45)', marginBottom: 6 }}>{info.label}</p>
-                      <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.9rem', color: '#1F1B16', lineHeight: 1.6, whiteSpace: 'pre-line' }}>{info.value}</p>
+                      <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(11,31,58,.45)', marginBottom: 6 }}>{info.label}</p>
+                      <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.9rem', color: '#0B1F3A', lineHeight: 1.6, whiteSpace: 'pre-line' }}>{info.value}</p>
                     </div>
                   </a>
                 ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 28, borderRadius: 4, background: '#fff', border: '1px solid rgba(155,27,27,.1)', boxShadow: '0 2px 12px rgba(31,27,22,.06)' }}>
-                    <div style={{ color: '#9B1B1B' }}>{info.icon}</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 28, borderRadius: 4, background: '#fff', border: '1px solid rgba(11,31,58,.1)', boxShadow: '0 2px 12px rgba(11,31,58,.06)' }}>
+                    <div style={{ color: '#0B1F3A' }}>{info.icon}</div>
                     <div>
-                      <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(31,27,22,.45)', marginBottom: 6 }}>{info.label}</p>
-                      <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.9rem', color: '#1F1B16', lineHeight: 1.6, whiteSpace: 'pre-line' }}>{info.value}</p>
+                      <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.7rem', fontWeight: 700, letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(11,31,58,.45)', marginBottom: 6 }}>{info.label}</p>
+                      <p style={{ fontFamily: 'var(--font-lato)', fontSize: '.9rem', color: '#0B1F3A', lineHeight: 1.6, whiteSpace: 'pre-line' }}>{info.value}</p>
                     </div>
                   </div>
                 )}
@@ -92,7 +92,7 @@ export default function Contato() {
             ))}
           </div>
 
-          <div className="reveal" style={{ borderRadius: 4, overflow: 'hidden', border: '1px solid rgba(155,27,27,.12)', boxShadow: '0 2px 12px rgba(31,27,22,.06)' }}>
+          <div className="reveal" style={{ borderRadius: 4, overflow: 'hidden', border: '1px solid rgba(11,31,58,.12)', boxShadow: '0 2px 12px rgba(11,31,58,.06)' }}>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.5!2d-53.355!3d-26.698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUi4gRG96ZSBkZSBPdXR1YnJvLCA3OTgsIFJvbWVsw6JuZGlhIFND!5e0!3m2!1spt!2sbr!4v1"
               width="100%"
@@ -105,7 +105,7 @@ export default function Contato() {
             />
             <div style={{ textAlign: 'center', padding: '20px 0' }}>
               <a href={MAPS_URL} target="_blank" rel="noopener noreferrer"
-                style={{ fontFamily: 'var(--font-lato)', fontSize: '.875rem', fontWeight: 700, color: '#9B1B1B', textDecoration: 'none', letterSpacing: '.05em' }}>
+                style={{ fontFamily: 'var(--font-lato)', fontSize: '.875rem', fontWeight: 700, color: '#0B1F3A', textDecoration: 'none', letterSpacing: '.05em' }}>
                 Abrir no Google Maps →
               </a>
             </div>

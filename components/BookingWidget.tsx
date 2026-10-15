@@ -27,6 +27,7 @@ const ICON_WA = (
 export default function BookingWidget() {
   const [step, setStep] = useState<Step>("form")
   const [waLink, setWaLink] = useState("")
+  const [errMsg, setErrMsg] = useState("")
 
   const today    = new Date().toISOString().split("T")[0]
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0]
@@ -46,14 +47,17 @@ export default function BookingWidget() {
           checkout:  fd.get("checkout"),
           people:    fd.get("people"),
           notes:     fd.get("notes") || "",
+          website:   fd.get("website") || "",
         }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
+      setErrMsg("")
       setWaLink(data.waLink)
       setStep("success")
       setTimeout(() => window.open(data.waLink, "_blank"), 1400)
-    } catch {
+    } catch (err) {
+      setErrMsg(err instanceof Error ? err.message : "")
       setStep("error")
     }
   }
@@ -76,7 +80,7 @@ export default function BookingWidget() {
   if (step === "error") return (
     <div style={widgetWrap}>
       <div style={{ textAlign: "center", padding: "1.5rem 2rem" }}>
-        <p style={{ ...sans, color: "var(--text-muted)", marginBottom: "1rem" }}>Algo deu errado. Tente novamente ou entre pelo WhatsApp.</p>
+        <p style={{ ...sans, color: "var(--text-muted)", marginBottom: "1rem" }}>{errMsg || "Algo deu errado. Tente novamente ou entre pelo WhatsApp."}</p>
         <button onClick={() => setStep("form")} style={btnPrimary}>Tentar novamente</button>
       </div>
     </div>
@@ -97,6 +101,7 @@ export default function BookingWidget() {
       </div>
 
       <form onSubmit={handleSubmit} style={{ padding: "0 2rem 1.75rem" }}>
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0 }} />
         {/* Linha 1: campos principais */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "1px", background: "var(--line)", borderRadius: "6px", overflow: "hidden", marginBottom: "1rem" }}>
           {/* Check-in */}
@@ -159,14 +164,14 @@ export default function BookingWidget() {
 }
 
 /* ── Estilos compartilhados ── */
-const serif: React.CSSProperties = { fontFamily: "'Cormorant Garamond', Georgia, serif" }
+const serif: React.CSSProperties = { fontFamily: "var(--font-cormorant), Georgia, serif" }
 const sans:  React.CSSProperties = { fontFamily: "Lato, Arial, sans-serif" }
 
 const widgetWrap: React.CSSProperties = {
-  background: "rgba(250,247,242,0.97)",
+  background: "rgba(244,239,230,0.97)",
   backdropFilter: "blur(16px)",
   borderRadius: "8px",
-  boxShadow: "0 24px 80px rgba(31,27,22,0.25), 0 4px 16px rgba(31,27,22,0.1)",
+  boxShadow: "0 24px 80px rgba(11,31,58,0.25), 0 4px 16px rgba(11,31,58,0.1)",
   width: "100%",
   border: "1px solid rgba(229,222,209,0.6)",
 }

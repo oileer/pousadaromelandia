@@ -60,7 +60,7 @@ export default function FAQ({ items = FAQS, limit }: Props) {
                 }}
               >
                 <span style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontFamily: "var(--font-cormorant), Georgia, serif",
                   fontSize: "1.15rem", fontWeight: 500,
                   color: isOpen ? "var(--accent)" : "var(--text)",
                   lineHeight: 1.3, transition: "color 0.2s",

@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Único administrador: o dono da pousada.
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'eullerlolatosmo@gmail.com';
+    }
+
+    // Pedido de reserva feito pelo site (sem login): só pode criar, sempre "pendente",
+    // sem valor, com campos e tamanhos validados.
+    function validSiteReservation() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['guestName', 'phone', 'startDate', 'endDate', 'people', 'roomNumber', 'value', 'notes', 'status', 'origem', 'createdAt'])
+        && d.keys().hasAll(['guestName', 'phone', 'startDate', 'endDate', 'people', 'status', 'origem', 'createdAt'])
+        && d.status == 'pendente'
+        && d.origem == 'site'
+        && d.value == 0
+        && d.guestName is string && d.guestName.size() > 1 && d.guestName.size() <= 80
+        && d.phone is string && d.phone.size() >= 8 && d.phone.size() <= 30
+        && d.startDate is string && d.startDate.size() == 10
+        && d.endDate is string && d.endDate.size() == 10
+        && d.endDate > d.startDate
+        && d.people is number && d.people >= 1 && d.people <= 20
+        && (d.roomNumber == null || d.roomNumber is number)
+        && (!('notes' in d.keys()) || (d.notes is string && d.notes.size() <= 500))
+        && d.createdAt == request.time;
+    }
+
+    // Pedido feito pelo link de cadastro: o hóspede entra com o Google, então `uid` é dele.
+    function validLinkReservation() {
+      let d = request.resource.data;
+      return request.auth != null
+        && d.keys().hasOnly(['uid', 'email', 'guestName', 'phone', 'document', 'city', 'startDate', 'endDate', 'people', 'roomNumber', 'value', 'arrivalTime', 'vehiclePlate', 'notes', 'status', 'origem', 'createdAt'])
+        && d.keys().hasAll(['uid', 'guestName', 'phone', 'startDate', 'endDate', 'people', 'status', 'origem', 'createdAt'])
+        && d.uid == request.auth.uid
+        && d.status == 'pendente'
+        && d.origem == 'link'
+        && d.value == 0
+        && d.guestName is string && d.guestName.size() > 1 && d.guestName.size() <= 80
+        && d.phone is string && d.phone.size() >= 8 && d.phone.size() <= 30
+        && d.startDate is string && d.startDate.size() == 10
+        && d.endDate is string && d.endDate.size() == 10
+        && d.endDate > d.startDate
+        && d.people is number && d.people >= 1 && d.people <= 20
+        && (d.roomNumber == null || d.roomNumber is number)
+        && (!('email' in d.keys()) || (d.email is string && d.email.size() <= 120))
+        && (!('document' in d.keys()) || (d.document is string && d.document.size() <= 20))
+        && (!('city' in d.keys()) || (d.city is string && d.city.size() <= 60))
+        && (!('arrivalTime' in d.keys()) || (d.arrivalTime is string && d.arrivalTime.size() <= 5))
+        && (!('vehiclePlate' in d.keys()) || (d.vehiclePlate is string && d.vehiclePlate.size() <= 10))
+        && (!('notes' in d.keys()) || (d.notes is string && d.notes.size() <= 500))
+        && d.createdAt == request.time;
+    }
+
+    match /reservations/{reservationId} {
+      allow get: if isAdmin() || (request.auth != null && resource.data.get('uid', '') == request.auth.uid);
+      allow list: if isAdmin() || (request.auth != null && resource.data.get('uid', '') == request.auth.uid);
+      allow create: if (isAdmin() && request.resource.data.id == reservationId) || validSiteReservation() || validLinkReservation();
+      allow update: if isAdmin() && request.resource.data.id == reservationId;
+      allow delete: if isAdmin();
+    }
+
+    // Perfil do hóspede (preenchido uma vez no cadastro): só o dono e o administrador leem.
+    match /guests/{uid} {
+      allow read: if isAdmin() || (request.auth != null && request.auth.uid == uid);
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name', 'phone', 'document', 'city', 'email', 'updatedAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() <= 80
+        && request.resource.data.phone is string && request.resource.data.phone.size() <= 30;
+      allow delete: if isAdmin();
+    }
+
+    // Bloqueio de datas: um documento por quarto/noite. Só pode ser CRIADO (nunca alterado),
+    // então duas reservas simultâneas no mesmo quarto/noite não passam.
+    // Leitura pública: o site só vê "quarto X ocupado na noite Y", sem dados de hóspede.
+    match /roomDays/{lockId} {
+      allow read: if true;
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly(['room', 'date', 'reservationId'])
+        && lockId == string(request.resource.data.room) + '_' + request.resource.data.date;
+      allow delete: if isAdmin();
+    }
+  }
+}
