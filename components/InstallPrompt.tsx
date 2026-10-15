@@ -11,7 +11,7 @@ const KEY = 'pwa-install-dismissed';
 const SNOOZE_MS = 14 * 24 * 60 * 60 * 1000;
 
 /** Pede para instalar o app no celular com um toque (Android/Chrome) ou explica o passo no iPhone. */
-export default function InstallPrompt({ name, color = '#9B1B1B' }: { name: string; color?: string }) {
+export default function InstallPrompt({ name, color = '#0B1F3A' }: { name: string; color?: string }) {
   const [evt, setEvt] = useState<BIPEvent | null>(null);
   const [ios, setIos] = useState(false);
   const [visible, setVisible] = useState(false);
