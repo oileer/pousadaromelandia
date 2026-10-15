@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "Reservation": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Reservation",
+      "type": "object",
+      "description": "Represents a reservation at the inn.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the reservation."
+        },
+        "guestName": {
+          "type": "string",
+          "description": "Name of the guest making the reservation."
+        },
+        "roomNumber": {
+          "type": "number",
+          "description": "Room number for the reservation (1-11)."
+        },
+        "people": {
+          "type": "number",
+          "description": "Number of people for the reservation (1-4)."
+        },
+        "value": {
+          "type": "number",
+          "description": "Reservation value in BRL."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Start date (check-in) of the reservation (YYYY-MM-DD).",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date (check-out) of the reservation (YYYY-MM-DD).",
+          "format": "date"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional notes for the reservation."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the reservation was created."
+        }
+      },
+      "required": [
+        "id",
+        "guestName",
+        "roomNumber",
+        "people",
+        "value",
+        "startDate",
+        "endDate"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/reservations/{reservationId}",
+        "definition": {
+          "entityName": "Reservation",
+          "schema": {
+            "$ref": "#/backend/entities/Reservation"
+          },
+          "description": "Stores reservation data.",
+          "params": [
+            {
+              "name": "reservationId",
+              "description": "The unique identifier for the reservation."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to securely manage reservations for the inn. A top-level `reservations` collection stores all reservation documents. Since there's only a single user (owner), authorization is simplified and based on authentication. The system directly uses authentication via `request.auth.uid`, without any roles or custom claims. All reservations are placed in a flat `reservations` collection. This allows for simple queries and listing operations.\n\n**Authorization Independence:** There is no need for authorization independence, since there is only 1 user.\n\n**QAPs Support:** The flat `reservations` collection simplifies listing all reservations, which supports the \"Ver todas as reservas\" (see all reservations) feature."
+  }
+}

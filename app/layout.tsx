@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "https://www.pousadaromelandia.com.br" },
   robots: { index: true, follow: true },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: { capable: true, title: "Pousada Romelândia", statusBarStyle: "default" },
+  icons: { apple: "/icon-192.png" },
 }
 
 const schemaOrg = {
