@@ -101,7 +101,7 @@ export default function GalleryStrip() {
           <div style={{ maxWidth: '90vw', maxHeight: '90vh', position: 'relative', minWidth: 300, minHeight: 200 }} onClick={e => e.stopPropagation()}>
             <Image
               src={lightbox}
-              alt="Pousada Romelandia"
+              alt="Foto da Pousada Romelândia, Romelândia SC"
               width={1200}
               height={800}
               style={{ objectFit: 'contain', maxHeight: '90vh', width: 'auto', borderRadius: 2 }}

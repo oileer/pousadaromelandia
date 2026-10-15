@@ -89,7 +89,7 @@ export default function HeroSection() {
     <section style={{ position: "relative", height: "100svh", minHeight: 680, display: "flex", alignItems: "flex-end", overflow: "hidden" }}>
       {/* Background */}
       <div className="hero-bg-anim" data-parallax style={{ position: "absolute", inset: "-4% 0", willChange: "transform" }}>
-        <Image src="/assets/Corredores/1.jpeg" alt="Pousada Romelândia" fill priority style={{ objectFit: "cover", objectPosition: "center" }} sizes="100vw" />
+        <Image src="/assets/Corredores/1.jpeg" alt="Entrada da Pousada Romelândia, hospedagem no centro de Romelândia SC" fill priority style={{ objectFit: "cover", objectPosition: "center" }} sizes="100vw" />
       </div>
 
       <div style={overlay} />

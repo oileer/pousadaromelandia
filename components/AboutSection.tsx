@@ -15,7 +15,7 @@ export default function AboutSection() {
           }}>
             <Image
               src="/assets/Corredores/0.jpeg"
-              alt="Entrada da Pousada Romelandia"
+              alt="Sala de estar da Pousada Romelândia, em Romelândia SC"
               fill
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 900px) 100vw, 50vw"
@@ -31,7 +31,7 @@ export default function AboutSection() {
           }}>
             <Image
               src="/assets/Quarto5/1.jpeg"
-              alt="Quarto Pousada Romelandia"
+              alt="Quarto com cama de casal e ar-condicionado na Pousada Romelândia"
               fill
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 900px) 100vw, 30vw"
