@@ -7,11 +7,15 @@ import GalleryStrip from '@/components/GalleryStrip';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import FaqSection from '@/components/FaqSection';
 import CtaBanner from '@/components/CtaBanner';
+import { FAQ_DATA } from '@/lib/faq-data';
 
 export const metadata: Metadata = {
-  title: 'Hotel Pousada Romelândia | Romelândia SC',
-  description: 'A melhor hospedagem de Romelândia SC — 9 quartos, café da manhã incluso, Wi-Fi e estacionamento gratuito. Reserve pelo WhatsApp.',
+  title: { absolute: 'Pousada em Romelândia SC | Hotel Pousada Romelândia' },
+  description: 'Pousada no centro de Romelândia SC: quartos com ar-condicionado, Wi-Fi, café da manhã incluso e estacionamento gratuito. Nota 4,5 no Google. Reserve pelo WhatsApp.',
+  alternates: { canonical: '/' },
 };
+
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ_DATA.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 
 const rooms = [
   {
@@ -43,6 +47,7 @@ const rooms = [
 export default function HomePage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <HeroSection />
       <StatsBand />
       <AboutSection />

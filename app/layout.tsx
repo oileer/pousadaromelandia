@@ -6,6 +6,7 @@ import ScrollReveal from "@/components/ScrollReveal"
 import WhatsAppFAB from "@/components/WhatsAppFAB"
 import SiteFx from "@/components/SiteFx"
 import "./globals.css"
+import { SITE_URL, NEGOCIO } from "@/lib/seo"
 
 const cormorant = Playfair_Display({
   subsets: ["latin"],
@@ -25,7 +26,7 @@ const lato = Lato({
 export const viewport = { themeColor: "#0B1F3A" }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pousadaromelandia.vercel.app"),
+  metadataBase: new URL(SITE_URL),
   title: { default: "Hotel Pousada Romelândia | Romelândia SC", template: "%s | Pousada Romelândia" },
   description: "Pousada aconchegante no centro de Romelândia SC. 9 quartos com ar-condicionado, Wi-Fi e estacionamento gratuito. Avaliação 4,5 ★ no Google. Reserve pelo WhatsApp.",
   keywords: "pousada romelândia, hotel romelândia SC, hospedagem romelândia, onde dormir romelândia, pousada oeste catarinense",
@@ -34,14 +35,13 @@ export const metadata: Metadata = {
     description: "Hospedagem confortável e acolhedora no coração de Romelândia SC. Reserve agora pelo WhatsApp.",
     type: "website",
     locale: "pt_BR",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Hotel Pousada Romelândia" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hotel Pousada Romelândia",
     description: "Hospedagem aconchegante em Romelândia SC. Avaliação 4,5 ★ no Google.",
   },
-  alternates: { canonical: "https://www.pousadaromelandia.com.br" },
+  alternates: { canonical: "./" },
   robots: { index: true, follow: true },
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "Pousada Romelândia", statusBarStyle: "default" },
@@ -52,12 +52,22 @@ const schemaOrg = {
   "@context": "https://schema.org",
   "@type": "LodgingBusiness",
   "name": "Hotel Pousada Romelândia",
-  "url": "https://www.pousadaromelandia.com.br",
+  "url": SITE_URL,
   "telephone": "+55 49 9 8400-8534",
   "email": "pousadaromelandia@gmail.com",
-  "image": "https://www.pousadaromelandia.com.br/assets/Corredores/1.jpeg",
+  "image": SITE_URL + "/assets/Corredores/1.jpeg",
   "description": "Pousada aconchegante no centro de Romelândia SC. 9 quartos com ar-condicionado, Wi-Fi e estacionamento gratuito.",
-  "priceRange": "$$",
+  "@id": SITE_URL + "/#negocio",
+  "logo": SITE_URL + "/icon-512.png",
+  "priceRange": "$",
+  "petsAllowed": false,
+  "paymentAccepted": "Dinheiro, PIX, Cartão",
+  "currenciesAccepted": "BRL",
+  "availableLanguage": "pt-BR",
+  "sameAs": [NEGOCIO.instagram],
+  "hasMap": NEGOCIO.mapa,
+  "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" },
+  "areaServed": { "@type": "City", "name": "Romelândia" },
   "checkinTime": "14:00",
   "checkoutTime": "12:00",
   "address": {
